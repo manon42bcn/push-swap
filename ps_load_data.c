@@ -19,9 +19,21 @@ typedef struct s_stacks
 	int	*stack_a;
 	int	*stack_b;
 	int	pivot;
+	int	first;
+	int	last;
+	int	size;
 } t_stacks;
 
 // Crear pivote medio de tres ... primero, ultimo y centro...
+int	ft_pick_pivot(int a, int b, int c)
+{
+	if ((a > b) ^ (a > c))
+		return (a);
+	else if ((b < a) ^ (b < c))
+		return (b);
+	else
+		return (c);
+}
 
 int ft_check_stack(int *stack, int num)
 {
@@ -37,48 +49,59 @@ int ft_check_stack(int *stack, int num)
 	return (0);
 }
 
-int *ft_load_stack(int argc, char *argv[])
+int ft_load_stack(int argc, char *argv[], t_stacks *stack)
 {
 	int	*stack_a;
 	int	i;
 	int	num;
 
 	i = 1;
-	stack_a = (int *)malloc(sizeof(int) * (argc - 1));
-	if (stack_a == NULL)
-		return (NULL);
+	stack->stack_a = (int *)malloc(sizeof(int) * (argc - 1));
+	stack->stack_b = (int *)malloc(sizeof(int) * (argc - 1));
+	if (stack->stack_a == NULL || stack->stack_b == NULL)
+		return (0);
 	while (i < argc && argv[i])
 	{
 		num = ft_atoi(argv[i]);
-		if (ft_check_stack(&stack_a[0], num) == 1)
+		if (i == 1)
+			stack->first = num;
+		if (ft_check_stack(&stack->stack_a[0], num) == 1)
 		{
-			free (stack_a);
+			free (stack->stack_a);
+			free (stack->stack_b);
 			return (0);
 		}
 		else
-			stack_a[i - 1] = num;
+			stack->stack_a[i - 1] = num;
 		i++;
 	}
-	return (stack_a);
+	stack->size = --i;
+	stack->last = stack->stack_a[i - 1];
+	return (1);
 }
 
 int main(int argc, char *argv[])
 {
 
 	int i;
-	int *stack_a;
+	t_stacks *stack;
 
-	stack_a = ft_load_stack(argc, argv);
-	if (stack_a == 0)
-		printf("error");
-	else
+	stack = (t_stacks *)malloc(sizeof(t_stacks));
+	if (stack == NULL)
+		return (0);
+	if(ft_load_stack(argc, argv, stack) == 0)
 	{
-		i = 0;
-		while (stack_a[i])
-		{
-			printf("%i\n", stack_a[i]);
-			i++;
-		}
+		printf("error");
+		return (0);
 	}
+	
+	i = 0;
+	while (stack->stack_a[i])
+	{
+		printf("%i\n", stack->stack_a[i]);
+		i++;
+	}
+	printf("size %i first %i last %i\n", stack->size, stack->first, stack->last);
+	printf("checking pivot: %i - centre %i - pivot %i\n", stack->size / 2, stack->stack_a[stack->size / 2], ft_pick_pivot(stack->first, stack->last, stack->stack_a[stack->size / 2]));
 	return 0;
 }
