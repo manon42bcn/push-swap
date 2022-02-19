@@ -10,30 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "push_swap.h"
 #include "libft/ft_atoi.c"
-
-typedef struct s_stacks
-{
-	int	*stack_a;
-	int	*stack_b;
-	int	pivot;
-	int	first;
-	int	last;
-	int	size;
-} t_stacks;
+#include "ps_utils.c"
+#include "ps_small_cases.c"
 
 // Crear pivote medio de tres ... primero, ultimo y centro...
-int	ft_pick_pivot(int a, int b, int c)
-{
-	if ((a > b) ^ (a > c))
-		return (a);
-	else if ((b < a) ^ (b < c))
-		return (b);
-	else
-		return (c);
-}
 
 int ft_check_stack(int *stack, int num)
 {
@@ -47,6 +29,16 @@ int ft_check_stack(int *stack, int num)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_push_swap_cases(t_stacks *stack)
+{
+	if (stack->size == 1)
+		return (write(1, "\n", 1));
+	else if (stack->size == 2)
+		return (ft_push_swap_two(stack));
+	else if (stack->size == 3)
+		return (ft_push_swap_tree(stack));
 }
 
 int ft_load_stack(int argc, char *argv[], t_stacks *stack)
@@ -95,13 +87,18 @@ int main(int argc, char *argv[])
 		return (0);
 	}
 	
+	ft_push_swap_cases(stack);
+	
 	i = 0;
+	printf("\n");
 	while (stack->stack_a[i])
 	{
 		printf("%i\n", stack->stack_a[i]);
 		i++;
 	}
+	/*
 	printf("size %i first %i last %i\n", stack->size, stack->first, stack->last);
 	printf("checking pivot: %i - centre %i - pivot %i\n", stack->size / 2, stack->stack_a[stack->size / 2], ft_pick_pivot(stack->first, stack->last, stack->stack_a[stack->size / 2]));
 	return 0;
+	*/
 }
