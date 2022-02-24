@@ -19,7 +19,18 @@ void 	ft_swap(int *a, int *b)
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
+}
 
+int ft_swap(stack *stack, char ab)
+{	
+	if (ab = 'a')
+	{
+
+	}
+	else
+	{
+		
+	}
 }
 
 int	ft_pick_pivot(int a, int b, int c)

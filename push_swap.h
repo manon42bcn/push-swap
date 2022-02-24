@@ -20,10 +20,14 @@ typedef struct s_stacks
 {
 	int	*stack_a;
 	int	*stack_b;
+	int sa_from;
+	int sb_from;
 	int	pivot;
 	int	first;
 	int	last;
 	int	size;
+	int size_a;
+	int size_b;
 } t_stacks;
 
 #endif

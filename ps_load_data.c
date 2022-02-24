@@ -48,7 +48,7 @@ int ft_load_stack(int argc, char *argv[], t_stacks *stack)
 	int	num;
 
 	i = 1;
-	stack->stack_a = (int *)malloc(sizeof(int) * (argc - 1));
+	stack->stack_a = (int  *)malloc(sizeof(int) * (argc - 1));
 	stack->stack_b = (int *)malloc(sizeof(int) * (argc - 1));
 	if (stack->stack_a == NULL || stack->stack_b == NULL)
 		return (0);
@@ -68,6 +68,8 @@ int ft_load_stack(int argc, char *argv[], t_stacks *stack)
 		i++;
 	}
 	stack->size = --i;
+	stack->sa_from = 0;
+	stack->sb_from = stack->size - 1;
 	stack->last = stack->stack_a[i - 1];
 	return (1);
 }
@@ -87,7 +89,7 @@ int main(int argc, char *argv[])
 		return (0);
 	}
 	
-	ft_push_swap_cases(stack);
+	//ft_push_swap_cases(stack);
 	
 	i = 0;
 	printf("\n");
