@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 #include "libft/ft_atoi.c"
+#include "libft/ft_itoa.c"
 #include "ps_utils.c"
 #include "ps_small_cases.c"
 
@@ -68,8 +69,10 @@ int ft_load_stack(int argc, char *argv[], t_stacks *stack)
 		i++;
 	}
 	stack->size = --i;
+	stack->size_a = stack->size;
+	stack->size_b = 0;
 	stack->sa_from = 0;
-	stack->sb_from = stack->size - 1;
+	stack->sb_from = stack->size;
 	stack->last = stack->stack_a[i - 1];
 	return (1);
 }
@@ -89,13 +92,25 @@ int main(int argc, char *argv[])
 		return (0);
 	}
 	
-	ft_reverse_rotate_stack(stack, 'a');
+	ft_push_stack(stack, 'b');
 	
 	i = 0;
 	printf("\n");
+	printf(" sA - sB \n");
+	char *a;
+	char *b;
+
 	while (stack->stack_a[i])
-	{
-		printf("%i\n", stack->stack_a[i]);
+	{	
+		if (stack->sa_from <= i && stack->size_a > 0)
+			a = ft_itoa(stack->stack_a[i]);
+		else
+			a = "";
+		if (stack->sb_from <= i && stack->size_b > 0)
+			b = ft_itoa(stack->stack_b[i]);
+		else
+			b = "";
+		printf("% 4s - % 4s\n", a, b);
 		i++;
 	}
 	/*

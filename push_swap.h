@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
-
+ /*
 typedef struct s_stacks
 {
 	int	*stack_a;
@@ -29,5 +29,19 @@ typedef struct s_stacks
 	int size_a;
 	int size_b;
 } t_stacks;
+*/
+typedef struct s_stacks
+{
+	int				value;
+	struct s_stacks	*next;
+}	t_stacks
 
+typedef struct s_meta_data
+{
+	int				size;
+	int 			min_val;
+	int 			max_val;
+	struct t_stacks	*first_a;
+	struct t_stacks	*first_b;
+}	t_meta_data
 #endif
