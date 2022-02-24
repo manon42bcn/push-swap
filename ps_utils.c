@@ -23,13 +23,15 @@ void 	ft_swap(int *a, int *b)
 
 int ft_swap(stack *stack, char ab)
 {	
-	if (ab = 'a')
+	if (ab = 'a' && stack->size_a >= 2)
 	{
-
+		ft_swap(stack->stack_a[stack->sa_from], stack->stack_a[stack->sa_from + 1]);
+		write(1, "sa\n", 3);
 	}
-	else
+	else if (ab = 'b' && stack->size_b >= 2)
 	{
-		
+		ft_swap(stack->stack_b[stack->sb_from], stack->stack_b[stack->sb_from + 1]);
+		write(1, "sb\n", 3);
 	}
 }
 
