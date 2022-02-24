@@ -18,7 +18,7 @@ int ft_push_swap_two(t_stacks *stack)
 		return (write(1, "\n", 1));
 	else
 		ft_swap(&stack->stack_a[0], &stack->stack_a[1]);
-	return (write(1, "sa\n", 3));
+	return (ft_swap(stack, 'a'));
 }
 
 int ft_push_swap_tree(t_stacks *stack)

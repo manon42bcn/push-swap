@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 		return (0);
 	}
 	
-	//ft_push_swap_cases(stack);
+	ft_reverse_rotate_stack(stack, 'a');
 	
 	i = 0;
 	printf("\n");
