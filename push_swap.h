@@ -34,14 +34,14 @@ typedef struct s_stacks
 {
 	int				value;
 	struct s_stacks	*next;
-}	t_stacks
+}	t_stacks;
 
 typedef struct s_meta_data
 {
 	int				size;
 	int 			min_val;
 	int 			max_val;
-	struct t_stacks	*first_a;
-	struct t_stacks	*first_b;
-}	t_meta_data
+	struct s_stacks	*first_a;
+	struct s_stacks	*first_b;
+}	t_meta_data;
 #endif

@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 		return (0);
 	}
 	
-	ft_push_stack(stack, 'b');
+	ft_rotate_a(stack, 'a');
 	
 	i = 0;
 	printf("\n");
