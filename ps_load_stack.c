@@ -13,8 +13,10 @@
 #include "push_swap.h"
 #include "libft/ft_atoi.c"
 #include "ps_stacks_utils.c"
-#include "ps_actions_swap_rotate.c"
-#include "ps_actions_push.c"
+#include "ps_actions.c"
+#include "ps_do_actions.c"
+#include "ps_utils.c"
+#include "ps_cases_solve.c"
 
 int main(int argc, char *argv[])
 {
@@ -27,24 +29,28 @@ int main(int argc, char *argv[])
 	stack_a = ft_load_stack(argc, argv, meta);
 	if (meta == NULL || stack_a == NULL)
 		return (0);
-	ft_rotate_a(meta, 'a');
+	ft_select_cases(meta);
+	//ft_push_all_stack(meta);
 	node = meta->first_a;
-	node_b = meta->first_b;
 	printf("min %i max %i size %i\n", meta->min_val, meta->max_val, meta->size);
-	while (node)
-	{
-		printf("%i\n", node->value);
-		node = node->next;
-		//node_b = node_b->next;
-	}
-	/*
-	ft_push(meta, 'b');
-	node = meta->first_a;
+	printf("min next min index: %i y next min valor %i\n", ft_next_min(meta, meta->min_val, 'a'), ft_get_value_node(meta, ft_next_min(meta, meta->min_val, 'a'), 'a'));
+	printf("max next index: %i y next max valor %i\n", ft_next_max(meta, meta->max_val, 'a'), ft_get_value_node(meta, ft_next_max(meta, meta->max_val, 'a'), 'a'));
+	printf("stack_a\n");
+	if (!node)
+		printf("empty stack_a\n");
 	while (node)
 	{
 		printf("%i\n", node->value);
 		node = node->next;
 	}
-	printf("%i fnc size\n", ft_list_size(meta->first_a));
-	*/
+	node = meta->first_b;
+	printf("stack_b\n");
+	if (!node)
+		printf("empty stack_a\n");
+	while (node)
+	{
+		printf("%i\n", node->value);
+		node = node->next;
+	}
+	printf("%i solve\n", ft_check_solve(meta));
 }
