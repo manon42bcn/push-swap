@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_stacks_utils.c                                  :+:      :+:    :+:   */
+/*   ps_loading_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 23:26:06 by mporras-          #+#    #+#             */
-/*   Updated: 2022/02/24 23:26:10 by mporras-         ###   ########.fr       */
+/*   Updated: 2022/02/27 14:42:44 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_list_size(t_stacks *first_node)
-{
-	t_stacks	*node;
-	int			i;
-	
-	node = first_node;
-	i = 0;
-	while (node)
-	{
-		i++;
-		node = node->next;
-	}
-	return (i);
-}
+#include "../inc/push_swap.h"
 
 t_meta_data	*ft_meta_data_init(void)
 {
@@ -91,7 +78,6 @@ t_stacks	*ft_load_stack(int argc, char *argv[], t_meta_data *meta)
 {
 	int			i;
 	t_stacks	*stack;
-	t_stacks	*first;
 
 	i = 1;
 	if (meta == NULL)

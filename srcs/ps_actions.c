@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../inc/push_swap.h"
+
 void	ft_swap_action(t_meta_data *meta, char ab)
 {
 	int	value;

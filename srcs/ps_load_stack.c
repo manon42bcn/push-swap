@@ -10,20 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/ft_atoi.c"
-#include "ps_stacks_utils.c"
-#include "ps_actions.c"
-#include "ps_do_actions.c"
-#include "ps_utils.c"
-#include "ps_cases_solve.c"
+#include "../inc/push_swap.h"
+
+
 
 int main(int argc, char *argv[])
 {
 	t_stacks	*stack_a;
 	t_meta_data	*meta;
 	t_stacks	*node;
-	t_stacks	*node_b;
+	//t_stacks	*node_b;
 
 	meta = ft_meta_data_init();
 	stack_a = ft_load_stack(argc, argv, meta);

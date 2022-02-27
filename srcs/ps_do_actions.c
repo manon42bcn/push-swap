@@ -10,24 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_do_push(t_meta_data *meta, char ab)
+#include "../inc/push_swap.h"
+
+int	ft_do_push(t_meta_data *meta, char ab)
 {
 	if (ab == 'a')
 	{
 		ft_push_action(meta, 'a');
-		write(1, "pa\n", 3);
+		write(1, "pb\n", 3);
 		return (1);
 	}
 	else if (ab == 'b')
 	{
 		ft_push_action(meta, 'b');
-		write(1, "pb\n", 3);
+		write(1, "pa\n", 3);
 		return (1);
 	}
 	return (0);
 }
 
-int ft_do_rotate(t_meta_data *meta, char ab)
+int	ft_do_rotate(t_meta_data *meta, char ab)
 {
 	if (ab == 'a')
 	{
@@ -51,7 +53,7 @@ int ft_do_rotate(t_meta_data *meta, char ab)
 	return (0);
 }
 
-int ft_do_reverse_rotate(t_meta_data *meta, char ab)
+int	ft_do_reverse_rotate(t_meta_data *meta, char ab)
 {
 	if (ab == 'a')
 	{
@@ -75,7 +77,7 @@ int ft_do_reverse_rotate(t_meta_data *meta, char ab)
 	return (0);
 }
 
-int ft_do_swap(t_meta_data *meta, char ab)
+int	ft_do_swap(t_meta_data *meta, char ab)
 {
 	if (ab == 'a')
 	{
