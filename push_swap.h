@@ -15,21 +15,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
- /*
-typedef struct s_stacks
-{
-	int	*stack_a;
-	int	*stack_b;
-	int sa_from;
-	int sb_from;
-	int	pivot;
-	int	first;
-	int	last;
-	int	size;
-	int size_a;
-	int size_b;
-} t_stacks;
-*/
+
 typedef struct s_stacks
 {
 	int				value;
@@ -44,4 +30,5 @@ typedef struct s_meta_data
 	struct s_stacks	*first_a;
 	struct s_stacks	*first_b;
 }	t_meta_data;
+
 #endif
