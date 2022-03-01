@@ -46,7 +46,7 @@ int	ft_check_stack(t_meta_data *meta, int num)
 	}
 }
 
-t_stacks	*ft_create_elem(int value, t_meta_data *meta)
+static t_stacks	*ft_create_elem(int value, t_meta_data *meta)
 {
 	t_stacks	*node;
 

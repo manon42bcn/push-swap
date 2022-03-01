@@ -16,7 +16,7 @@ int	ft_list_size(t_stacks *first_node)
 {
 	t_stacks	*node;
 	int			i;
-	
+
 	node = first_node;
 	i = 0;
 	while (node)
@@ -29,7 +29,8 @@ int	ft_list_size(t_stacks *first_node)
 
 t_stacks	*ft_select_stack(t_meta_data *meta, char ab)
 {
-	t_stacks *stack;
+	t_stacks	*stack;
+
 	if (ab == 'a')
 		stack = meta->first_a;
 	else
@@ -53,16 +54,13 @@ int	ft_get_value_node(t_meta_data *meta, int index, char ab)
 	t_stacks	*node;
 
 	i = 0;
-	if (ab == 'a')
-		node = meta->first_a;
-	else
-		node = meta->first_b;
+	node = ft_select_stack(meta, ab);
 	while (++i < index)
 		node = node->next;
 	return (node->value);
 }
 
-int ft_value_position(t_meta_data *meta, int value, char ab)
+int	ft_value_position(t_meta_data *meta, int value, char ab)
 {
 	t_stacks	*node;
 	int			i;

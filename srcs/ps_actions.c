@@ -14,24 +14,26 @@
 
 void	ft_swap_action(t_meta_data *meta, char ab)
 {
-	int	value;
+	t_stacks	*tmp;
 
 	if (ab == 'a' || ab == 's')
 	{
 		if (ft_list_size(meta->first_a) > 1)
 		{
-			value = meta->first_a->value;
-			meta->first_a->value = meta->first_a->next->value;
-			meta->first_a->next->value = value;
+			tmp = meta->first_a->next;
+			meta->first_a->next = tmp->next;
+			tmp->next = meta->first_a;
+			meta->first_a = tmp;
 		}
 	}
 	if (ab == 'b' || ab == 's')
 	{
 		if (ft_list_size(meta->first_b) > 1)
 		{
-			value = meta->first_b->value;
-			meta->first_b->value = meta->first_b->next->value;
-			meta->first_b->next->value = value;
+			tmp = meta->first_b->next;
+			meta->first_b->next = tmp->next;
+			tmp->next = meta->first_b;
+			meta->first_b = tmp;
 		}
 	}
 }

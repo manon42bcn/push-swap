@@ -12,57 +12,33 @@
 
 #include "../inc/push_swap.h"
 
-int ft_check_solve(t_meta_data *meta)
-{
-	int			i;
-	int			prev;
-	t_stacks	*stack;
-
-	i = 0;
-	if (meta->first_b != NULL)
-		return (0);
-	stack = meta->first_a;
-	prev = stack->value;
-	while (stack)
-	{
-		if (prev > stack->value)
-			return (0);
-		i++;
-		prev = stack->value;
-		stack = stack->next;
-	}
-	if (i != meta->size)
-		return (0);
-	return (1);
-}
-
-int ft_max_at_stack(t_meta_data *meta, char ab)
+int	ft_max_at_stack(t_meta_data *meta, char ab)
 {
 	t_stacks	*node;
 	int			i;
-	int			max;
-	int			k;
+	int			min;
+	int			rst;
 
-	i = 1;
+	i = 0;
 	node = ft_select_stack(meta, ab);
 	if (!node)
 		return (0);
-	k = 1;
-	max = node->value;
+	rst = 1;
+	min = node->value;
 	while (node)
 	{
-		if (node->value > max)
-		{
-			max = node->value;
-			k = i;
-		}
 		i++;
+		if (min < node->value)
+		{
+			min = node->value;
+			rst = i;
+		}
 		node = node->next;
 	}
-	return (k);
+	return (rst);
 }
 
-int ft_min_at_stack(t_meta_data *meta, char ab)
+int	ft_min_at_stack(t_meta_data *meta, char ab)
 {
 	t_stacks	*node;
 	int			i;
@@ -87,50 +63,73 @@ int ft_min_at_stack(t_meta_data *meta, char ab)
 	}
 	return (rst);
 }
-int ft_next_max(t_meta_data *meta, int max, char ab)
+
+int	ft_find_next(t_meta_data *meta, char ab, int index)
 {
 	t_stacks	*node;
-	int			i;
+	int			value;
 	int			rst;
-	int			k;
+	int			i;
 
 	node = ft_select_stack(meta, ab);
-	rst = node->value;
-	i = 1;
-	k = 1;
+	value = ft_get_value_node(meta, index, ab);
+	rst = ft_get_value_node(meta, ft_max_at_stack(meta, ab), ab);
+	i = 0;
+	index = 0;
 	while (node)
 	{
-		if ((i == 2 && rst == max) || (node->value != max && node->value > rst))
+		i++;
+		if (node->value > value && node->value <= rst)
 		{
 			rst = node->value;
-			k = i;
+			index = i;
 		}
 		node = node->next;
-		i++;
 	}
-	return (k);
+	return (index);
 }
 
-int ft_next_min(t_meta_data *meta, int min, char ab)
+int	ft_find_prev(t_meta_data *meta, char ab, int index)
 {
 	t_stacks	*node;
-	int			i;
+	int			value;
 	int			rst;
-	int			k;
+	int			i;
 
 	node = ft_select_stack(meta, ab);
-	rst = node->value;
-	i = 1;
-	k = 1;
+	value = ft_get_value_node(meta, index, ab);
+	rst = ft_get_value_node(meta, ft_min_at_stack(meta, ab), ab);
+	i = 0;
+	index = 0;
 	while (node)
 	{
-		if ((i == 2 && rst == min) || (node->value != min && node->value < rst))
+		i++;
+		if (node->value < value && node->value >= rst)
 		{
 			rst = node->value;
-			k = i;
+			index = i;
 		}
 		node = node->next;
-		i++;
 	}
-	return (k);
+	return (index);
+}
+
+int	ft_middle_point(t_meta_data *meta, char ab)
+{
+	t_stacks	*node;
+	int			stack_size;
+	int			middle_index;
+	int			i;
+	int			node_index;
+
+	node = ft_select_stack(meta, ab);
+	stack_size = ft_list_size(node);
+	if (stack_size == 0)
+		return (0);
+	middle_index = stack_size / 2;
+	node_index = ft_min_at_stack(meta, ab);
+	i = 1;
+	while (i++ < middle_index)
+		node_index = ft_find_next(meta, ab, node_index);
+	return (node_index);
 }

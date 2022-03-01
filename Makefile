@@ -18,6 +18,7 @@ SRCS_FILES	 =	ps_actions.c \
 			  	ps_actions_utils.c \
 			  	ps_cases_solve.c \
 			  	ps_do_actions.c \
+			  	ps_general_solve_utils.c \
 			  	ps_load_stack.c \
 			  	ps_loading_utils.c \
 			  	ps_small_cases.c \
@@ -43,13 +44,13 @@ INCLUDES_BNS =	inc/ft_printf_bonus.h
 
 all: $(NAME)
  
-$(NAME): $(OBJS) $(LIB)
+$(NAME): $(OBJS) $(LIB_DIR)$(LIB)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB_DIR)$(LIB)
 
 $(OBJS): $(SRCS)
 	$(CC) $(CFLAGS) -c $(SRCS) $(INCLUDES)
 
-$(LIB):
+$(LIB_DIR)$(LIB):
 	$(MAKE) bonus -C $(LIB_DIR)
 
 bonus: $(BONUS_OBJS)

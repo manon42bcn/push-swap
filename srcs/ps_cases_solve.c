@@ -12,9 +12,9 @@
 
 #include "../inc/push_swap.h"
 
-int ft_select_cases(t_meta_data *meta)
+int	ft_select_cases(t_meta_data *meta)
 {
 	if (meta->size <= 5)
-		return (ft_small_cases(meta));
+		return (ft_small_cases(meta, 'a'));
 	return (0);
 }
