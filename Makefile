@@ -18,11 +18,12 @@ SRCS_FILES	 =	ps_actions.c \
 			  	ps_actions_utils.c \
 			  	ps_cases_solve.c \
 			  	ps_do_actions.c \
-			  	ps_general_solve_utils.c \
 			  	ps_load_stack.c \
 			  	ps_loading_utils.c \
+			  	ps_presort.c \
 			  	ps_small_cases.c \
 			  	ps_solver_utils.c \
+			  	ps_spin_sort.c \
 			  	ps_stack_utils.c \
 			  	ps_utils.c
 #BONUS_FILES	 = ft_printf_bonus.c \

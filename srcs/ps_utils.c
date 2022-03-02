@@ -14,23 +14,6 @@
 
 /* esta funcion no la he usado... antes de entregar debo revisar si hay funciones fantasma */
 
-int	ft_absolute(int num)
-{
-	if (num < 0)
-		return (num * -1);
-	return (num);
-}
-
-int	ft_pick_pivot(int a, int b, int c)
-{
-	if ((a > b) ^ (a > c))
-		return (a);
-	else if ((b < a) ^ (b < c))
-		return (b);
-	else
-		return (c);
-}
-
 int	ft_check_solve(t_meta_data *meta)
 {
 	int			i;
@@ -108,30 +91,4 @@ int	ft_get_index_from_node(t_meta_data *meta, char ab, t_stacks *to_find)
 		node = node->next;
 	}
 	return (i);
-}
-
-int 	ft_smaller_than_pivot(t_meta_data *meta, char ab, char se, int pivot)
-{
-	t_stacks	*node;
-	int			pivot_value;
-	int			rst;
-	int			pivot_checked;
-
-	pivot_value = ft_get_value_node(meta, pivot, ab);
-	node = ft_select_stack(meta, ab);
-	rst = 0;
-	pivot_checked = 0;
-	while (node)
-	{
-		if (node->value == pivot_value && se == 'e')
-			pivot_checked = 1;
-		if (node->value == pivot_value && se == 's')
-			break ;
-		if (node->value < pivot_value && se == 's')
-			rst++;
-		if (node->value < pivot_value && se == 'e' && pivot_checked == 1)
-			rst++;
-		node = node->next;
-	}
-	return (rst);
 }

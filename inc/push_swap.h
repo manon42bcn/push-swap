@@ -51,7 +51,7 @@ int			ft_check_stack(t_meta_data *meta, int num);
 t_stacks	*ft_load_stack(int argc, char *argv[], t_meta_data *meta);
 int			ft_small_cases(t_meta_data *meta, char ab);
 int			ft_max_at_stack(t_meta_data *meta, char ab);
-int			ft_min_at_stack(t_meta_data *meta, char ab);
+int			ft_min_at_stack(t_meta_data *meta, char ab);	
 int			ft_find_next(t_meta_data *meta, char ab, int index);
 int			ft_middle_point(t_meta_data *meta, char ab);
 int			ft_find_prev(t_meta_data *meta, char ab, int index);
@@ -60,13 +60,11 @@ t_stacks	*ft_select_stack(t_meta_data *meta, char ab);
 t_stacks	*ft_last_node(t_meta_data *meta, char ab);
 int			ft_get_value_node(t_meta_data *meta, int index, char ab);
 int			ft_value_position(t_meta_data *meta, int value, char ab);
-int			ft_absolute(int num);
-int			ft_pick_pivot(int a, int b, int c);
 int			ft_check_solve(t_meta_data *meta);
 int			ft_check_solve_stack(t_meta_data *meta, char ab);
 t_stacks	*ft_get_node_from_index(t_meta_data *meta, char ab, int index);
 int			ft_get_index_from_node(t_meta_data *meta, char ab, t_stacks *to_find);
-int			ft_placing_at_b(t_meta_data *meta, t_stacks *to_place);
-int 		ft_smaller_than_pivot(t_meta_data *meta, char ab, char se, int pivot);
+int			ft_spin_sort_at_a(t_meta_data *meta);
+int			ft_presort_at_b(t_meta_data *meta);
 
 #endif
