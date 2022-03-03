@@ -24,6 +24,9 @@ t_meta_data	*ft_meta_data_init(void)
 	rst->max_val = 0;
 	rst->first_a = NULL;
 	rst->first_b = NULL;
+	rst->pivots_stacks = NULL;
+	rst->forced_pivots = NULL;
+	rst->pivot = NULL;
 	return (rst);
 }
 
@@ -46,7 +49,7 @@ int	ft_check_stack(t_meta_data *meta, int num)
 	}
 }
 
-static t_stacks	*ft_create_elem(int value, t_meta_data *meta)
+t_stacks	*ft_create_elem(int value, t_meta_data *meta)
 {
 	t_stacks	*node;
 

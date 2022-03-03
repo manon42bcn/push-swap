@@ -92,3 +92,17 @@ int	ft_get_index_from_node(t_meta_data *meta, char ab, t_stacks *to_find)
 	}
 	return (i);
 }
+
+t_stacks	*ft_get_node_from_value(t_meta_data *meta, char ab, int value)
+{
+	t_stacks	*node;
+
+	node = ft_select_stack(meta, ab);
+	while (node)
+	{
+		if (node->value == value)
+			return (node);
+		node = node->next;
+	}
+	return (NULL);
+}

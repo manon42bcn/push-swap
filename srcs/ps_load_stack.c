@@ -16,14 +16,18 @@ int main(int argc, char *argv[])
 {
 	t_stacks	*stack_a;
 	t_meta_data	*meta;
+	t_meta_data *meta_copy;
 	t_stacks	*node;
 	//t_stacks	*node_b;
 
 	meta = ft_meta_data_init();
 	stack_a = ft_load_stack(argc, argv, meta);
+	meta_copy = ft_copy_stacks(meta);
 	if (meta == NULL || stack_a == NULL)
 		return (0);
-	printf("moves %i\n", ft_select_cases(meta));
+	printf("\n++++\n _SIM_ \n++++\n%i", ft_solver_simulator(meta));
+	printf("\n++++\n _END_SIM_ \n++++\n");
+	ft_select_cases(meta);
 	node = meta->first_a;
 	printf("stack_a\n");
 	if (!node)
@@ -40,11 +44,31 @@ int main(int argc, char *argv[])
 	node = meta->first_b;
 	printf("stack_b\n");
 	if (!node)
-		printf("empty stack_a\n");
+		printf("empty stack_b\n");
 	while (node)
 	{
 		printf("%i\n", node->value);
 		node = node->next;
 	}
+	node = meta->pivots_stacks->first_a;
+	printf("\n _PIVOTS_\n");
+	
+	while (node)
+	{
+		printf("%i\n", node->value);
+		node = node->next;
+	}
+	
+	node = meta_copy->first_a;
+	printf("\n _COPYED_\n");
+	
+	while (node)
+	{
+		printf("%i\n", node->value);
+		node = node->next;
+	}
+	
+	//ft_clear_all(meta);
+	printf("%i solve estruct...\n", meta->moves);
 	printf("%i solve\n", ft_check_solve(meta));
 }

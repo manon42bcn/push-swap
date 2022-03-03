@@ -38,66 +38,24 @@ int 	ft_smaller_than_pivot(t_meta_data *meta, char ab, char se, t_stacks *pivot)
 
 t_stacks	*ft_select_pivot(t_meta_data *meta)
 {
-	t_stacks	*node;
-	t_stacks	*hold;
-	int			targets_hold;
-	int			targets;
+	t_stacks	*pivot_tmp;
 
-	node = ft_get_node_from_index(meta, 'a', ft_middle_point(meta, 'a'));
-	targets = ft_smaller_than_pivot(meta, 'a', 's', node);
-	hold = node;
-	targets_hold = targets;
-	if (ft_list_size(meta->first_a) > 25 && targets < 20)
+	if (meta->pivots_stacks == NULL)	
+		meta->pivots_stacks = ft_meta_data_init();
+	if (meta->forced_pivots != NULL && meta->forced_pivots->first_a != NULL)
 	{
-		while (node && targets_hold < 20)
-		{
-			node = ft_get_node_from_index(meta, 'a', ft_find_next(meta, 'a', ft_get_index_from_node(meta, 'a', node)));
-			targets = ft_smaller_than_pivot(meta, 'a', 's', node);
-			if (targets > targets_hold)
-			{
-				targets_hold = targets;
-				hold = node;
-			}
-			node = node->next;
-			printf("%i value %i targets\n", hold->value, targets_hold);
-		}
-		return (hold);
+		if (meta->pivot == NULL)
+			return (meta->forced_pivots->first_a);
+		pivot_tmp = meta->forced_pivots->first_a;
+		ft_delete_node(meta->forced_pivots->first_a);
+		meta->forced_pivots->first_a = pivot_tmp->next;
+		pivot_tmp = ft_get_node_from_value(meta, 'a', pivot_tmp->value);
+		ft_create_elem_pivot(pivot_tmp->value, meta->pivots_stacks);
+		return (pivot_tmp);
 	}
-	else if (ft_list_size(meta->first_a) > 25 && targets > 20)
-	{
-		while (node && targets_hold > 20)
-		{
-			node = ft_get_node_from_index(meta, 'a', ft_find_prev(meta, 'a', ft_get_index_from_node(meta, 'a', node)));
-			targets = ft_smaller_than_pivot(meta, 'a', 's', node);
-			if (targets < targets_hold && targets > 20)
-			{
-				targets_hold = targets;
-				hold = node;
-			}
-			node = node->next;
-			printf("%i value %i targets\n", hold->value, targets_hold);
-		}
-		return (hold);
-	}
-	return (ft_get_node_from_index(meta, 'a', ft_middle_point(meta, 'a')));
-	/*
-	t_stacks	*node;
-	int			i;
-	int			index;
-
-	i = 0;
-	node = ft_get_node_from_index(meta, 'a', ft_min_at_stack(meta, 'a'));
-	if (meta->first_a->value == node->value && ft_list_size(meta->first_a) > 50)
-	{
-		while (i < 20)
-		{
-			index = ft_get_index_from_node(meta, 'a', node);
-			node = ft_get_node_from_index(meta, 'a', ft_find_next(meta, 'a', index));
-			i++;
-		}
-		return (node);
-	}
-	*/
+	pivot_tmp = ft_get_node_from_index(meta, 'a', ft_middle_point(meta, 'a'));
+	ft_create_elem_pivot(pivot_tmp->value, meta->pivots_stacks);
+	return (pivot_tmp);
 }
 
 int	*ft_next_distance(t_meta_data *meta, int *lower_upper_size)
@@ -177,6 +135,7 @@ int ft_presort_at_b(t_meta_data *meta)
 	if (meta->pivot == NULL)
 	{
 		meta->pivot = ft_select_pivot(meta); //ft_get_node_from_index(meta, 'a', ft_middle_point(meta, 'a'));
+		printf("%i pivotes..\n", meta->pivot->value);
 	}
 	if (ft_min_at_stack(meta, 'a') == ft_get_index_from_node(meta, 'a', meta->pivot))
 	{
