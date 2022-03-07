@@ -57,23 +57,20 @@ int 	ft_process_list(int argc, char *argv[])
 	meta = ft_meta_data_init();
 	if (ft_load_stack(argc, argv, meta) == 0)
 		return (0);
-	ft_testing_pivots(meta);
 	//ft_print_stacks(meta);
-	//if (ft_check_solve(meta) == 1)
-	//	return (1);
-	//ft_get_sub_stack_limits(meta);
-	//meta->sim = 1;
-	//if (ft_select_cases(meta) == 0)
-	//	return (0);
+	if (ft_check_solve(meta) == 1)
+		return (1);
+	ft_get_sub_stack_limits(meta);
+	meta->sim = 1;
+	if (ft_select_cases(meta) == 0)
+		return (0);
 	//ft_print_limits(meta);
-	//ft_print_stacks(meta);
+	ft_print_stacks(meta);
 	return (1);
 }
 
 int main(int argc, char *argv[])
 {
-	//while (argc-- > 0)
-	//	printf("%i - %s\n",argc, argv[argc]);
 	if (ft_process_list(argc, argv) == 0)
 		write(1, "Error\n", 6);
 	return (0);

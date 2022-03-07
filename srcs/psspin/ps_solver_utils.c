@@ -113,3 +113,23 @@ int	ft_find_prev(t_meta_data *meta, char ab, int index)
 	}
 	return (index);
 }
+
+int	ft_middle_point(t_meta_data *meta, char ab)
+{
+	t_stacks	*node;
+	int			stack_size;
+	int			middle_index;
+	int			i;
+	int			node_index;
+
+	node = ft_select_stack(meta, ab);
+	stack_size = ft_list_size(node);
+	if (stack_size == 0)
+		return (0);
+	middle_index = stack_size / 2;
+	node_index = ft_min_at_stack(meta, ab);
+	i = 1;
+	while (i++ < middle_index)
+		node_index = ft_find_next(meta, ab, node_index);
+	return (node_index);
+}

@@ -1,57 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_utils.c                                         :+:      :+:    :+:   */
+/*   ps_ft_pivot.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/19 16:03:06 by mporras-          #+#    #+#             */
-/*   Updated: 2022/02/19 16:03:09 by mporras-         ###   ########.fr       */
+/*   Created: 2022/03/03 12:07:56 by mporras-          #+#    #+#             */
+/*   Updated: 2022/03/03 12:08:00 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-
-int cuts = 10;
-
-int ft_do_while(t_meta_data *meta, int i, char ab, int (*act)(t_meta_data *, char))
-{
-	int	rst;
-
-	rst = 0;
-	while (i-- > 0)
-		rst += act(meta, ab);
-	return (rst);
-}
-
-int ft_get_cuts(t_meta_data *meta)
-{
-	static int size = 0;
-
-	if (size == 0)
-		size = meta->size;
-	size = size - cuts;
-	//if (size < 21)
-	//	return (size);
-	//if (size > 20 && size < 51)
-	//	return (15);
-	return (cuts);
-
-/*
-	fix_size = ft_list_size(meta->first_a);
-	if (fix_size < meta->size)
-		fix_size--;
-	if (fix_size > 0 && fix_size < 25)
-		return (ft_list_size(meta->first_a));
-	return (cuts);
-	
-	if (meta->size <= 100)
-		return (16);
-	else if (meta->size <= 500)
-		return (45);
-	return (10);
-	*/
-}
 
 t_stacks	*ft_create_elem_pivot(int value, t_meta_data *meta_pivot)
 {
@@ -163,23 +122,23 @@ t_stacks	*ft_create_elem_copy(int value, t_meta_data *meta, char ab)
 	return (node);
 }
 
-t_meta_data	*ft_copy_stacks_nodes(t_meta_data *meta, t_meta_data *dest)
+t_meta_data	*ft_copy_stacks_nodes(t_meta_data *meta, t_meta_data *dest, char ab)
 {
 	t_stacks	*stack;
 	t_stacks	*node;
 
-	node = meta->first_a;
+	node = ft_select_stack(meta, ab);
 	while (node)
 	{
-		if (dest->first_a == NULL)
+		if ((ab == 'a' && dest->first_a == NULL) || (ab == 'b' && dest->first_b == NULL))
 		{
-			stack = ft_create_elem_a(node->value, dest);
+			stack = ft_create_elem_copy(node->value, dest, ab);
 			if (stack == NULL)
 				return (NULL);
 		}
 		else
 		{
-			stack->next = ft_create_elem_a(node->value, dest);
+			stack->next = ft_create_elem_copy(node->value, dest, ab);
 			stack = stack->next;
 			if (stack == NULL)
 				return (NULL);
@@ -196,7 +155,8 @@ t_meta_data	*ft_copy_stacks(t_meta_data *meta)
 	rst = ft_meta_data_init();
 	if (rst == NULL)
 		return (NULL);
-	rst = ft_copy_stacks_nodes(meta, rst);
+	rst = ft_copy_stacks_nodes(meta, rst, 'a');
+	rst = ft_copy_stacks_nodes(meta, rst, 'b');
 	return (rst);
 }
 
@@ -209,59 +169,5 @@ int ft_build_pivots(t_meta_data *meta)
 	if (pivots == NULL)
 		return (0);
 	meta_copy = ft_copy_stacks(meta);
-	return (0);
-}
-
-void ft_testing_pivots(t_meta_data *meta)
-{
-	t_meta_data *copy;
-	int min;
-	int max;
-	int sum;
-	int min_cut;
-	int max_cut;
-	int i;
-
-	i = 1;
-	min = 0;
-	max = 0;
-	sum = 0;
-
-	while (cuts < 50)
-	{
-		copy = ft_copy_stacks(meta);
-		ft_get_sub_stack_limits(copy);
-		copy->sim = 1;
-		ft_select_cases(copy);
-		if (copy->moves < min || min == 0)
-		{
-			min = copy->moves;
-			min_cut = cuts;
-		}
-		if (copy->moves > max || max == 0)
-		{
-			max = copy->moves;
-			max_cut = cuts;
-		}
-		sum += copy->moves;
-		//printf("%i size, %i moves, %i cuts\n", copy->size, copy->moves, cuts);
-		ft_clear_all(copy);
-		cuts++;
-		i++;
-	}
-	printf("%i size | %i min (%i)- %i max (%i) avr %i\n", meta->size, min, min_cut, max, max_cut, (sum / i));
-}
-
-int ft_check_numbers_at_list(t_meta_data *meta)
-{
-	t_stacks *node;
-	t_stacks *pivots;
-
-	node = meta->first_a;
-	pivots = meta->pivot;
-
-	//idea: hacer funcion que cuente cuantos numeros hay entre los pivotes...
-	// dar prioridad a los numeros mas bajos de cada sub stack...
-	// y practicar la mecanografia diariamente por favor...
 	return (0);
 }

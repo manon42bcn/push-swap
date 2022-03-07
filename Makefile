@@ -6,38 +6,36 @@
 #    By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/27 02:38:37 by mporras-          #+#    #+#              #
-#    Updated: 2022/02/27 02:38:44 by mporras-         ###   ########.fr        #
+#    Updated: 2022/03/06 01:21:46 by mporras-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		 =	push-swap
+NAME		 =	push_swap
 LIB 		 =	libft.a
 LIB_DIR 	 =	libft/
 SRC_DIR		 =	srcs
 SRCS_FILES	 =	ps_actions.c \
-			  	ps_actions_utils.c \
-			  	ps_cases_solve.c \
-			  	ps_clear_stacks.c \
-			  	ps_do_actions.c \
-			  	ps_ft_pivot.c \
+				ps_cases_solve.c \
+				ps_clear_stacks.c \
+				ps_check_solve.c \
+				ps_do_actions.c \
 			  	ps_load_stack.c \
 			  	ps_loading_utils.c \
-			  	ps_presort.c \
+				ps_nodes_get.c \
+				ps_presort.c \
 			  	ps_small_cases.c \
-			  	ps_sml_do_actions.c \
-			  	ps_sml_presort.c \
-			  	ps_sml_solver.c \
 			  	ps_solver_utils.c \
-			  	ps_spin_sort.c \
+				ps_spin_sort.c \
 			  	ps_stack_utils.c \
-			  	ps_utils.c
+			  	ps_sub_stacks.c \
+				ps_utils.c
 #BONUS_FILES	 = ft_printf_bonus.c \
 			   ft_printf_input_bonus.c \
 			   ft_printf_utils_bonus.c \
 			   ft_token_hexa_bonus.c \
 			   ft_token_numbers_bonus.c \
 			   ft_token_process_bonus.c \
-			   ft_token_strings_bonus.c
+			   ft_token_strings_bonus.c \
 #BONUS_SRCS	 = $(addprefix $(SRC_DIR)/,$(BONUS_FILES))
 #BONUS_OBJS	 = $(BONUS_FILES:.c=.o)
 SRCS 		 =	$(addprefix $(SRC_DIR)/,$(SRCS_FILES))

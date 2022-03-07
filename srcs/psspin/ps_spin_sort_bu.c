@@ -12,18 +12,26 @@
 
 #include "../inc/push_swap.h"
 
-static int ft_spin_to_place(t_meta_data *meta, int position, int size)
+static int	ft_spin_to_place(t_meta_data *meta, int position, int size, int sim)
 {
+	int	rst;
+
+	rst = 0;
 	if (position > size / 2)
 	{
 		position = (size - position) + 1;
-		return(ft_do_while(meta, position, 'a', &ft_do_reverse_rotate));
+		while (position-- > 0)
+			rst += ft_do_reverse_rotate(meta, 'a', sim);
 	}
 	else
-		return(ft_do_while(meta, --position, 'a', &ft_do_rotate));
+	{
+		while (position-- > 1)
+			rst += ft_do_rotate(meta, 'a', sim);
+	}
+	return (rst);
 }
 
-static int ft_to_spin_value_next(t_meta_data *meta, t_stacks *to_insert)
+static int	ft_to_spin_value_next(t_meta_data *meta, t_stacks *to_insert)
 {
 	t_stacks	*node;
 	int			value;
@@ -51,7 +59,7 @@ static int ft_to_spin_value_next(t_meta_data *meta, t_stacks *to_insert)
 	return (index);
 }
 
-static int ft_to_spin_value_prev(t_meta_data *meta, t_stacks *to_insert)
+static int	ft_to_spin_value_prev(t_meta_data *meta, t_stacks *to_insert)
 {
 	t_stacks	*node;
 	int			value;
@@ -79,45 +87,43 @@ static int ft_to_spin_value_prev(t_meta_data *meta, t_stacks *to_insert)
 	return (index);
 }
 
-
-
-static int	ft_spin(t_meta_data *meta, t_stacks *to_insert)
+static int	ft_spin_stack(t_meta_data *meta, t_stacks *to_insert, int sim)
 {
-	int	index_prev;
-	int index_next;
+	int	index;
 	int	size;
 
 	size = ft_list_size(meta->first_a);
-	index_next = ft_to_spin_value_next(meta, to_insert);
-	index_prev = ft_to_spin_value_prev(meta, to_insert);
-
-	if (meta->first_a == NULL)
-		return (ft_do_push(meta, 'b'));
-	if (index_prev == 0)
-		return (ft_spin_to_place(meta, index_next, size) + ft_do_push(meta, 'b'));
-	if (index_next == 0)
-		return (ft_spin_to_place(meta, index_prev, size) + ft_do_push(meta, 'b'));
-	if (index_next > index_prev)
-		return (ft_spin_to_place(meta, index_prev, size) + ft_do_push(meta, 'b'));
-	if (index_next <= index_prev)
-		return (ft_spin_to_place(meta, index_next, size) + ft_do_push(meta, 'b'));
+	index = ft_to_spin_value_next(meta, to_insert);
+	if (index > 0)
+		return (ft_spin_to_place(meta, index, size, sim)
+			+ ft_do_push(meta, 'b', sim));
+	index = ft_to_spin_value_prev(meta, to_insert);
+	if (index > 0)
+		return (ft_spin_to_place(meta, index, size, sim)
+			+ ft_do_push(meta, 'b', sim));
 	return (0);
 }
 
-int ft_spin_sort_at_a(t_meta_data *meta)
+int	ft_spin_sort_at_a(t_meta_data *meta, int sim)
 {
-	int rst;
+	int	rst;
 
+	rst = 0;
 	if (meta->first_b)
-		return (ft_spin(meta, meta->first_b) + ft_spin_sort_at_a(meta));
+		return (ft_spin_stack(meta, meta->first_b, sim)
+			+ ft_spin_sort_at_a(meta, sim));
 	else
 	{
-		if (meta->first_a->value == meta->min_val)
-			return (0);
-		rst = ft_min_at_stack(meta, 'a');
 		if (ft_max_at_stack(meta, 'a') >= ft_list_size(meta->first_a) / 2)
-			return(ft_do_while(meta, ft_list_size(meta->first_a) - --rst, 'a', &ft_do_reverse_rotate));
+		{
+			while (ft_min_at_stack(meta, 'a') > 1)
+				rst += ft_do_reverse_rotate(meta, 'a', sim);
+		}
 		else
-			return(ft_do_while(meta, --rst, 'a', &ft_do_rotate));
+		{
+			while (ft_min_at_stack(meta, 'a') > 1)
+				rst += ft_do_rotate(meta, 'a', sim);
+		}
+		return (rst);
 	}
 }

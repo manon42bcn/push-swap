@@ -12,6 +12,16 @@
 
 #include "../inc/push_swap.h"
 
+int ft_do_while(t_meta_data *meta, int i, char ab, int (*act)(t_meta_data *, char))
+{
+	int	rst;
+
+	rst = 0;
+	while (i-- > 0)
+		rst += act(meta, ab);
+	return (rst);
+}
+
 static int	ft_next_at_cut(t_meta_data *meta)
 {
 	t_stacks	*node;
@@ -58,61 +68,22 @@ static int	ft_next_to_send(t_meta_data *meta)
 
 }
 
-int	ft_middle_point(t_meta_data *meta, char ab)
+int ft_spin_to_sort (t_meta_data *meta)
 {
-	t_stacks	*node;
-	int			stack_size;
-	int			middle_index;
-	int			i;
-	int			node_index;
-
-	node = ft_select_stack(meta, ab);
-	stack_size = ft_list_size(node);
-	if (stack_size == 0)
+	if (meta)
 		return (0);
-	middle_index = stack_size / 2;
-	node_index = ft_min_at_stack(meta, ab);
-	i = 1;
-	while (i++ < middle_index)
-		node_index = ft_find_next(meta, ab, node_index);
-	return (node_index);
-}
-
-int ft_spin_b(t_meta_data *meta)
-{
-	t_stacks	*pivot_b;
-	int			middle;
-	int			size;
-
-	size = ft_list_size(meta->first_b);
-	if (size > 1)
-		return (0);
-	if (size > 0 && size < 15)
-	{
-		middle = ft_middle_point(meta, 'b');
-		pivot_b = ft_get_node_from_index(meta, 'b', middle);
-		if (meta->first_b->value < pivot_b->value)
-		{
-			if (ft_next_at_cut(meta) > 0)
-				return (ft_do_rotate(meta, 'r'));
-			return (ft_do_rotate(meta, 'a'));
-		}
-	}
-	else
-	{
-		if (meta->first_b->value < meta->first_b->next->value)
-			return (ft_do_swap(meta, 'b'));
-	}
 	return (0);
 }
-
 int ft_presort_at_b(t_meta_data *meta)
 {
 	t_stacks	*pivot_stack;
 	t_stacks	*tmp_pivot;
 
-	if (meta->first_a == NULL || ft_list_size(meta->first_a) == 1)
+	if (meta->first_a == NULL)
 		return (0);
+	if (ft_list_size(meta->first_a) == 1)
+		return (ft_spin_to_sort(meta)
+		 		+ ft_do_push(meta, 'a'));
 	pivot_stack = ft_get_node_from_value(meta, 'a', meta->pivot->value);
 	if (ft_min_at_stack(meta, 'a') == ft_get_index_from_node(meta, 'a', pivot_stack))
 	{
@@ -122,13 +93,13 @@ int ft_presort_at_b(t_meta_data *meta)
 		return(ft_presort_at_b(meta));
 	}
 	if (meta->first_a->value < meta->pivot->value)
-		return (ft_do_push(meta, 'a')
-		 + ft_spin_b(meta)
+		return (ft_spin_to_sort(meta)
+		 + ft_do_push(meta, 'a')
 		 + ft_presort_at_b(meta));
 	if (meta->first_a->value >= meta->pivot->value)
 		return (ft_next_to_send(meta)
+		+ ft_spin_to_sort(meta)
 		+ ft_do_push(meta, 'a')
-		+ ft_spin_b(meta)
 		+ ft_presort_at_b(meta));
 	return (0);
 }

@@ -77,44 +77,15 @@ t_stacks	*ft_create_elem(int value, t_meta_data *meta)
 	return (node);
 }
 
-int ft_load_one_string(char *argv[], t_meta_data *meta)
-{
-	t_stacks	*stack;
-	char	**list;
-	int		i;
-	
-	i = 0;
-	list = ft_split(argv[1], ' ');
-	while (list[i])
-	{
-		if (meta->first_a == NULL)
-		{
-			stack = ft_create_elem(ft_atoi(&list[i][0]), meta);
-			if (stack == NULL)
-				return (0);
-		}
-		else
-		{
-			stack->next = ft_create_elem(ft_atoi(&list[i][0]), meta);
-			stack = stack->next;
-			if (stack == NULL)
-				return (0);
-		}
-		i++;
-	}
-	free(list);
-	return (1);
-}
-
 int	ft_load_stack(int argc, char *argv[], t_meta_data *meta)
 {
 	int			i;
 	t_stacks	*stack;
 
 	i = 1;
-	if (argc == 2)
-		return (ft_load_one_string(argv, meta));
-	while (argc-- > 1 && argv[i])
+	if (meta == NULL)
+		return (0);
+	while (i < argc && argv[i])
 	{
 		if (meta->first_a == NULL)
 		{

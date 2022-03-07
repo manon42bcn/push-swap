@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_sml_spin_sort.c                                 :+:      :+:    :+:   */
+/*   ps_spin_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 15:29:13 by mporras-          #+#    #+#             */
-/*   Updated: 2022/03/03 15:29:16 by mporras-         ###   ########.fr       */
+/*   Created: 2022/03/02 16:02:28 by mporras-          #+#    #+#             */
+/*   Updated: 2022/03/02 16:02:32 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-static int ft_sml_spin_to_next(t_meta_data *meta, int position, int size)
+static int ft_spin_to_next(t_meta_data *meta, int position, int size)
 {
 	int rst;
 
@@ -21,17 +21,17 @@ static int ft_sml_spin_to_next(t_meta_data *meta, int position, int size)
 	{
 		position = (size - position) + 1;
 		while (position-- > 0)
-			rst += ft_sml_do_reverse_rotate(meta, 'a');
+			rst += ft_do_reverse_rotate(meta, 'a');
 	}
 	else
 	{
 		while (position-- > 1)
-			rst += ft_sml_do_rotate(meta, 'a');
+			rst += ft_do_rotate(meta, 'a');
 	}
 	return (rst);
 }
 
-static int ft_sml_spin_to_prev(t_meta_data *meta, int position, int size)
+static int ft_spin_to_prev(t_meta_data *meta, int position, int size)
 {
 	int rst;
 
@@ -40,17 +40,17 @@ static int ft_sml_spin_to_prev(t_meta_data *meta, int position, int size)
 	{
 		position = (size - position) + 1;
 		while (position-- > 0)
-			rst += ft_sml_do_reverse_rotate(meta, 'a');
+			rst += ft_do_reverse_rotate(meta, 'a');
 	}
 	else
 	{
 		while (position-- > 1)
-			rst += ft_sml_do_rotate(meta, 'a');
+			rst += ft_do_rotate(meta, 'a');
 	}
 	return (rst);
 }
 
-static int ft_sml_to_spin_value_next(t_meta_data *meta, t_stacks *to_insert)
+static int ft_to_spin_value_next(t_meta_data *meta, t_stacks *to_insert)
 {
 	t_stacks	*node;
 	int			value;
@@ -78,7 +78,7 @@ static int ft_sml_to_spin_value_next(t_meta_data *meta, t_stacks *to_insert)
 	return (index);
 }
 
-static int ft_sml_to_spin_value_prev(t_meta_data *meta, t_stacks *to_insert)
+static int ft_to_spin_value_prev(t_meta_data *meta, t_stacks *to_insert)
 {
 	t_stacks	*node;
 	int			value;
@@ -106,40 +106,41 @@ static int ft_sml_to_spin_value_prev(t_meta_data *meta, t_stacks *to_insert)
 	return (index);
 }
 
-static int	ft_sml_spin_place(t_meta_data *meta, t_stacks *to_insert)
+static int	ft_spin_place(t_meta_data *meta, t_stacks *to_insert)
 {
 	int	index;
 	int	size;
 
 	size = ft_list_size(meta->first_a);
-	index = ft_sml_to_spin_value_next(meta, to_insert);
-
+	index = ft_to_spin_value_next(meta, to_insert);
+	if (meta->first_a == NULL)
+		return (ft_do_push(meta, 'b'));
 	if (index > 0)
-		return (ft_sml_spin_to_next(meta, index, size) + ft_sml_do_push(meta, 'b'));
-	index = ft_sml_to_spin_value_prev(meta, to_insert);
+		return (ft_spin_to_next(meta, index, size) + ft_do_push(meta, 'b'));
+	index = ft_to_spin_value_prev(meta, to_insert);
 	if (index > 0)
-		return (ft_sml_spin_to_prev(meta, index, size) + ft_sml_do_push(meta, 'b'));
+		return (ft_spin_to_prev(meta, index, size) + ft_do_push(meta, 'b'));
 	return (0);
 }
 
-int ft_sml_spin_sort_at_a(t_meta_data *meta)
+int ft_spin_sort_at_a(t_meta_data *meta)
 {
 	int	rst;
 
 	rst = 0;
 	if (meta->first_b)
-		return (ft_sml_spin_place(meta, meta->first_b) + ft_sml_spin_sort_at_a(meta));
+		return (ft_spin_place(meta, meta->first_b) + ft_spin_sort_at_a(meta));
 	else
 	{
 		if (ft_max_at_stack(meta, 'a') >= ft_list_size(meta->first_a) / 2)
 		{
 			while (ft_min_at_stack(meta, 'a') > 1)
-				rst += ft_sml_do_reverse_rotate(meta, 'a');
+				rst += ft_do_reverse_rotate(meta, 'a');
 		}
 		else
 		{
 			while (ft_min_at_stack(meta, 'a') > 1)
-				rst += ft_sml_do_rotate(meta, 'a');
+				rst += ft_do_rotate(meta, 'a');
 		}
 		return (rst);
 	}
