@@ -64,3 +64,20 @@ int	ft_get_value_node(t_meta_data *meta, int index, char ab)
 		node = node->next;
 	return (node->value);
 }
+
+int	ft_get_index_from_value(t_meta_data *meta, char ab, int value)
+{
+	t_stacks	*node;
+	int			i;
+
+	node = ft_select_stack(meta, ab);
+	i = 1;
+	while (node)
+	{
+		if (node->value == value)
+			return (i);
+		node = node->next;
+		i++;
+	}
+	return (0);
+}

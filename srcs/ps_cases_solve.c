@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-int ft_general_solve(t_meta_data *meta)
+int	ft_general_solve(t_meta_data *meta)
 {
 	int	rst;
 

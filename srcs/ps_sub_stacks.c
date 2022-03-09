@@ -12,22 +12,9 @@
 
 #include "../inc/push_swap.h"
 
-/*
-int ft_get_cuts(t_meta_data *meta)
+static int	ft_create_cuts(t_meta_data *meta, int value)
 {
-	if (meta)
-		return (cuts);
-	return (cuts);
-	if (meta->size <= 100)
-		return (16);
-	else if (meta->size <= 500)
-		return (45);
-	return (10);
-}
-*/
-int	ft_create_cuts(t_meta_data *meta, int value)
-{
-	t_stacks *rst;
+	t_stacks	*rst;
 	t_stacks	*node;
 
 	node = meta->pivot;
@@ -47,7 +34,7 @@ int	ft_create_cuts(t_meta_data *meta, int value)
 	return (1);
 }
 
-int ft_get_sub_stack_limits(t_meta_data *meta)
+int	ft_get_sub_stack_limits(t_meta_data *meta)
 {
 	int			i;
 	int			pos;
@@ -61,7 +48,7 @@ int ft_get_sub_stack_limits(t_meta_data *meta)
 		prev = pos;
 		pos = ft_find_next(meta, 'a', pos);
 		i++;
-		if (pos == 0 || i == ft_get_cuts(meta))
+		if (pos == 0 || i == meta->cuts)
 		{
 			if (pos == 0)
 				node = ft_get_node_from_index(meta, 'a', prev);

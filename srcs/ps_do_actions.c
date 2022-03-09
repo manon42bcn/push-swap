@@ -18,14 +18,14 @@ int	ft_do_push(t_meta_data *meta, char ab)
 	{
 		ft_push_action(meta, 'a');
 		if (meta->sim == 0)
-			write(1, "pb\n", 3);
+			ft_putendl_fd("pb", STDOUT_FILENO);
 		return (1);
 	}
 	else if (ab == 'b')
 	{
 		ft_push_action(meta, 'b');
 		if (meta->sim == 0)
-			write(1, "pa\n", 3);
+			ft_putendl_fd("pa", STDOUT_FILENO);
 		return (1);
 	}
 	return (0);
@@ -37,14 +37,14 @@ int	ft_do_rotate(t_meta_data *meta, char ab)
 	{
 		ft_rotate_action(meta, 'a');
 		if (meta->sim == 0)
-			write(1, "ra\n", 3);
+			ft_putendl_fd("ra", STDOUT_FILENO);
 		return (1);
 	}
 	else if (ab == 'b')
 	{
 		ft_rotate_action(meta, 'b');
 		if (meta->sim == 0)
-			write(1, "rb\n", 3);
+			ft_putendl_fd("rb", STDOUT_FILENO);
 		return (1);
 	}
 	else if (ab == 'r')
@@ -52,7 +52,7 @@ int	ft_do_rotate(t_meta_data *meta, char ab)
 		ft_rotate_action(meta, 'a');
 		ft_rotate_action(meta, 'b');
 		if (meta->sim == 0)
-			write(1, "rr\n", 3);
+			ft_putendl_fd("rr", STDOUT_FILENO);
 		return (1);
 	}
 	return (0);
@@ -64,14 +64,14 @@ int	ft_do_reverse_rotate(t_meta_data *meta, char ab)
 	{
 		ft_reverse_rotate_action(meta, 'a');
 		if (meta->sim == 0)
-			write(1, "rra\n", 4);
+			ft_putendl_fd("rra", STDOUT_FILENO);
 		return (1);
 	}
 	else if (ab == 'b')
 	{
 		ft_reverse_rotate_action(meta, 'b');
 		if (meta->sim == 0)
-			write(1, "rrb\n", 4);
+			ft_putendl_fd("rrb", STDOUT_FILENO);
 		return (1);
 	}
 	else if (ab == 'r')
@@ -79,7 +79,7 @@ int	ft_do_reverse_rotate(t_meta_data *meta, char ab)
 		ft_reverse_rotate_action(meta, 'a');
 		ft_reverse_rotate_action(meta, 'b');
 		if (meta->sim == 0)
-			write(1, "rrr\n", 4);
+			ft_putendl_fd("rrr", STDOUT_FILENO);
 		return (1);
 	}
 	return (0);
@@ -91,14 +91,14 @@ int	ft_do_swap(t_meta_data *meta, char ab)
 	{
 		ft_swap_action(meta, 'a');
 		if (meta->sim == 0)
-			write(1, "sa\n", 3);
+			ft_putendl_fd("sa", STDOUT_FILENO);
 		return (1);
 	}
 	else if (ab == 'b')
 	{
 		ft_swap_action(meta, 'b');
 		if (meta->sim == 0)
-			write(1, "sb\n", 3);
+			ft_putendl_fd("sb", STDOUT_FILENO);
 		return (1);
 	}
 	else if (ab == 'r')
@@ -106,16 +106,19 @@ int	ft_do_swap(t_meta_data *meta, char ab)
 		ft_swap_action(meta, 'a');
 		ft_swap_action(meta, 'b');
 		if (meta->sim == 0)
-			write(1, "ss\n", 3);
+			ft_putendl_fd("ss", STDOUT_FILENO);
 		return (1);
 	}
 	return (0);
 }
 
-int	ft_pulling_back_all_stack(t_meta_data *meta)
+int	ft_do_while(t_meta_data *meta, int i, char ab,
+	int (*act)(t_meta_data *, char))
 {
-	if (meta->first_b == NULL)
-		return (0);
-	else
-		return(ft_do_push(meta, 'b') + ft_pulling_back_all_stack(meta));
+	int	rst;
+
+	rst = 0;
+	while (i-- > 0)
+		rst += act(meta, ab);
+	return (rst);
 }

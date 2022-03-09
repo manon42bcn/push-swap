@@ -47,18 +47,3 @@ t_stacks	*ft_last_node(t_meta_data *meta, char ab)
 		node = node->next;
 	return (node);
 }
-
-int	ft_value_position(t_meta_data *meta, int value, char ab)
-{
-	t_stacks	*node;
-	int			i;
-
-	i = 1;
-	node = ft_select_stack(meta, ab);
-	while (node && node->value != value)
-	{
-		node = node->next;
-		i++;
-	}
-	return (i);
-}

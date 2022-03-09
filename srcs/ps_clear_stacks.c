@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-static void	ft_delete_node(t_stacks *node)
+void	ft_delete_node(t_stacks *node)
 {
 	node->next = NULL;
 	free (node);
@@ -41,13 +41,17 @@ static void	ft_clear_stack(t_meta_data *meta)
 	}
 }
 
-void	ft_clear_all(t_meta_data *meta)
+int	ft_clear_split(char **split)
 {
-	if (meta->first_a)
-		ft_clear_nodes(meta->first_a);
-	if (meta->first_b)
-		ft_clear_nodes(meta->first_b);
-	if (meta->pivot)
-		ft_clear_nodes(meta->first_b);
+	free(split);
+	return (0);
+}
+
+int	ft_clear_all(t_meta_data *meta)
+{
+	ft_clear_nodes(meta->first_a);
+	ft_clear_nodes(meta->first_b);
+	ft_clear_nodes(meta->first_b);
 	ft_clear_stack(meta);
+	return (0);
 }

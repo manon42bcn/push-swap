@@ -11,15 +11,19 @@
 # **************************************************************************** #
 
 NAME		 =	push_swap
+#BONUS_NAME   =	checker
 LIB 		 =	libft.a
 LIB_DIR 	 =	libft/
 SRC_DIR		 =	srcs
+#BONUS_DIR    =	bonus
 SRCS_FILES	 =	ps_actions.c \
+				ps_candidates_to_pull.c \
 				ps_cases_solve.c \
 				ps_clear_stacks.c \
 				ps_check_solve.c \
 				ps_do_actions.c \
-			  	ps_load_stack.c \
+				ps_find_cuts.c \
+				ps_loading_checks.c \
 			  	ps_loading_utils.c \
 				ps_nodes_get.c \
 				ps_presort.c \
@@ -28,15 +32,12 @@ SRCS_FILES	 =	ps_actions.c \
 				ps_spin_sort.c \
 			  	ps_stack_utils.c \
 			  	ps_sub_stacks.c \
-				ps_utils.c
-#BONUS_FILES	 = ft_printf_bonus.c \
-			   ft_printf_input_bonus.c \
-			   ft_printf_utils_bonus.c \
-			   ft_token_hexa_bonus.c \
-			   ft_token_numbers_bonus.c \
-			   ft_token_process_bonus.c \
-			   ft_token_strings_bonus.c \
-#BONUS_SRCS	 = $(addprefix $(SRC_DIR)/,$(BONUS_FILES))
+				ps_utils.c \
+				push_swap.c
+#BONUS_FILES	 =	ps_checker.c \
+				get_next_line.c \
+				get_next_line_utils.c
+#BONUS_SRCS	 = $(addprefix $(BONUS_DIR)/,$(BONUS_FILES))
 #BONUS_OBJS	 = $(BONUS_FILES:.c=.o)
 SRCS 		 =	$(addprefix $(SRC_DIR)/,$(SRCS_FILES))
 OBJS		 =	$(SRCS_FILES:.c=.o)
@@ -44,7 +45,7 @@ CC			 =	gcc
 RM			 = 	rm	-f
 CFLAGS		 =	-Wall -Wextra -Werror
 INCLUDES	 =	-Iinc/push_swap.h
-INCLUDES_BNS =	inc/ft_printf_bonus.h
+#INCLUDES_BNS =	-Iinc/checker.h
 
 all: $(NAME)
  
@@ -57,22 +58,20 @@ $(OBJS): $(SRCS)
 $(LIB_DIR)$(LIB):
 	$(MAKE) bonus -C $(LIB_DIR)
 
-bonus: $(BONUS_OBJS)
-	$(MAKE) bonus -C ./libft
-	cp libft/libft.a $(NAME)
-	ar	rcs	$(NAME)	$(BONUS_OBJS)
-	ranlib $(NAME)
+#bonus: $(BONUS_OBJS) $(LIB_DIR)$(LIB)
+#	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJS) $(LIB_DIR)$(LIB)
 
-$(BONUS_OBJS): $(BONUS_SRCS)
-	$(CC) $(CFLAGS) $(INCLUDES_BNS) $(BONUS_SRCS)
+#$(BONUS_OBJS): $(BONUS_SRCS)
+#	$(CC) $(CFLAGS) -c -D BUFFER_SIZE=200 $(INCLUDES_BNS) $(BONUS_SRCS)
 
 clean:
-	$(MAKE) -C ./libft fclean
-	$(RM) $(OBJS) #$(BONUS_OBJS)
+	$(MAKE) -C ./libft clean
+	$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(MAKE) -C ./libft fclean
+	$(RM) $(NAME) $(BONUS_NAME)
 
 re:	fclean $(NAME)
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re push_swap

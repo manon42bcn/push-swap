@@ -55,10 +55,9 @@ static int	ft_next_to_send(t_meta_data *meta)
 	}
 	else
 		return (ft_do_while(meta, distance, 'a', &ft_do_rotate));
-
 }
 
-int	ft_middle_point(t_meta_data *meta, char ab)
+static int	ft_middle_point(t_meta_data *meta, char ab)
 {
 	t_stacks	*node;
 	int			stack_size;
@@ -78,16 +77,16 @@ int	ft_middle_point(t_meta_data *meta, char ab)
 	return (node_index);
 }
 
-int ft_spin_b(t_meta_data *meta)
+static int	ft_spin_pivot_b(t_meta_data *meta)
 {
 	t_stacks	*pivot_b;
 	int			middle;
 	int			size;
 
 	size = ft_list_size(meta->first_b);
-	if (size > 1)
+	if (size < 3)
 		return (0);
-	if (size > 0 && size < 15)
+	if (size > 15)
 	{
 		middle = ft_middle_point(meta, 'b');
 		pivot_b = ft_get_node_from_index(meta, 'b', middle);
@@ -98,15 +97,10 @@ int ft_spin_b(t_meta_data *meta)
 			return (ft_do_rotate(meta, 'a'));
 		}
 	}
-	else
-	{
-		if (meta->first_b->value < meta->first_b->next->value)
-			return (ft_do_swap(meta, 'b'));
-	}
 	return (0);
 }
 
-int ft_presort_at_b(t_meta_data *meta)
+int	ft_presort_at_b(t_meta_data *meta)
 {
 	t_stacks	*pivot_stack;
 	t_stacks	*tmp_pivot;
@@ -114,21 +108,22 @@ int ft_presort_at_b(t_meta_data *meta)
 	if (meta->first_a == NULL || ft_list_size(meta->first_a) == 1)
 		return (0);
 	pivot_stack = ft_get_node_from_value(meta, 'a', meta->pivot->value);
-	if (ft_min_at_stack(meta, 'a') == ft_get_index_from_node(meta, 'a', pivot_stack))
+	if (ft_min_at_stack(meta, 'a')
+		== ft_get_index_from_node(meta, 'a', pivot_stack))
 	{
 		tmp_pivot = meta->pivot;
 		meta->pivot = tmp_pivot->next;
-		free(tmp_pivot);
-		return(ft_presort_at_b(meta));
+		ft_delete_node(tmp_pivot);
+		return (ft_presort_at_b(meta));
 	}
 	if (meta->first_a->value < meta->pivot->value)
 		return (ft_do_push(meta, 'a')
-		 + ft_spin_b(meta)
-		 + ft_presort_at_b(meta));
+			+ ft_spin_pivot_b(meta)
+			+ ft_presort_at_b(meta));
 	if (meta->first_a->value >= meta->pivot->value)
 		return (ft_next_to_send(meta)
-		+ ft_do_push(meta, 'a')
-		+ ft_spin_b(meta)
-		+ ft_presort_at_b(meta));
+			+ ft_do_push(meta, 'a')
+			+ ft_spin_pivot_b(meta)
+			+ ft_presort_at_b(meta));
 	return (0);
 }
