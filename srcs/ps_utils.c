@@ -26,3 +26,29 @@ int	ft_absolute(int n)
 		return (n * -1);
 	return (n);
 }
+
+int	ft_list_size(t_stacks *first_node)
+{
+	t_stacks	*node;
+	int			i;
+
+	node = first_node;
+	i = 0;
+	while (node)
+	{
+		i++;
+		node = node->next;
+	}
+	return (i);
+}
+
+t_stacks	*ft_select_stack(t_meta_data *meta, char ab)
+{
+	t_stacks	*stack;
+
+	if (ab == 'a')
+		stack = meta->first_a;
+	else
+		stack = meta->first_b;
+	return (stack);
+}

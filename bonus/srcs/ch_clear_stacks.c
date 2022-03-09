@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_clear_stacks.c                                  :+:      :+:    :+:   */
+/*   ch_clear_stacks.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 11:04:27 by mporras-          #+#    #+#             */
-/*   Updated: 2022/03/03 11:04:29 by mporras-         ###   ########.fr       */
+/*   Updated: 2022/03/09 23:06:48 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../inc/checker.h"
 
-void	ft_delete_node(t_stacks *node)
+static void	ft_delete_node(t_stacks *node)
 {
 	if (node)
 	{
@@ -39,7 +39,6 @@ static void	ft_clear_stack(t_meta_data *meta)
 	{
 		meta->first_a = NULL;
 		meta->first_b = NULL;
-		meta->pivot = NULL;
 		free (meta);
 	}
 }
@@ -56,7 +55,6 @@ int	ft_clear_all(t_meta_data *meta)
 	if (meta)
 	{
 		ft_clear_nodes(meta->first_a);
-		ft_clear_nodes(meta->first_b);
 		ft_clear_nodes(meta->first_b);
 		ft_clear_stack(meta);
 	}

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_loading_utils.c                                 :+:      :+:    :+:   */
+/*   ch_loading_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 23:26:06 by mporras-          #+#    #+#             */
-/*   Updated: 2022/02/27 14:42:44 by mporras-         ###   ########.fr       */
+/*   Updated: 2022/03/09 23:12:21 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../inc/checker.h"
 
 static int	ft_check_input(t_meta_data *meta, int num)
 {
@@ -31,25 +31,7 @@ static int	ft_check_input(t_meta_data *meta, int num)
 	}
 }
 
-t_meta_data	*ft_meta_data_init(void)
-{
-	t_meta_data	*rst;
-
-	rst = (t_meta_data *)malloc(sizeof(t_meta_data));
-	if (rst == NULL)
-		return (NULL);
-	rst->size = 0;
-	rst->min_val = 0;
-	rst->max_val = 0;
-	rst->moves = 0;
-	rst->sim = 0;
-	rst->first_a = NULL;
-	rst->first_b = NULL;
-	rst->pivot = NULL;
-	return (rst);
-}
-
-t_stacks	*ft_create_elem(int value, t_meta_data *meta)
+static t_stacks	*ft_create_elem(t_meta_data *meta, int value)
 {
 	t_stacks	*node;
 
@@ -60,20 +42,19 @@ t_stacks	*ft_create_elem(int value, t_meta_data *meta)
 		return (NULL);
 	node->value = value;
 	node->next = NULL;
-	if (meta->first_a == NULL)
-	{
-		meta->min_val = value;
-		meta->max_val = value;
-	}
-	else
-	{
-		if (value < meta->min_val)
-			meta->min_val = value;
-		else if (value > meta->max_val)
-			meta->max_val = value;
-	}
-	meta->size++;
 	return (node);
+}
+
+t_meta_data	*ft_meta_data_init(void)
+{
+	t_meta_data	*rst;
+
+	rst = (t_meta_data *)malloc(sizeof(t_meta_data));
+	if (rst == NULL)
+		return (NULL);
+	rst->first_a = NULL;
+	rst->first_b = NULL;
+	return (rst);
 }
 
 int	ft_load_stack(char **input, int init, t_meta_data *meta)
@@ -87,7 +68,7 @@ int	ft_load_stack(char **input, int init, t_meta_data *meta)
 	{
 		if (ft_send_to_atoi(input[i]) != 1)
 			return (ft_clear_all(meta));
-		new = ft_create_elem(ft_atoi(input[i]), meta);
+		new = ft_create_elem(meta, ft_atoi(input[i]));
 		if (new == NULL)
 			return (ft_clear_all(meta));
 		if (meta->first_a == NULL)

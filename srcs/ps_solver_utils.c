@@ -113,3 +113,13 @@ int	ft_find_prev(t_meta_data *meta, char ab, int index)
 	}
 	return (index);
 }
+
+t_stacks	*ft_last_node(t_meta_data *meta, char ab)
+{
+	t_stacks	*node;
+
+	node = ft_select_stack(meta, ab);
+	while (node->next != NULL)
+		node = node->next;
+	return (node);
+}

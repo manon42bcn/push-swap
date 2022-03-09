@@ -1,16 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_stack_utils.c                                   :+:      :+:    :+:   */
+/*   ch_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/27 14:44:12 by mporras-          #+#    #+#             */
-/*   Updated: 2022/02/27 14:44:15 by mporras-         ###   ########.fr       */
+/*   Created: 2022/03/04 16:29:06 by mporras-          #+#    #+#             */
+/*   Updated: 2022/03/09 23:28:39 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../inc/checker.h"
+
+int	ft_check_solve(t_meta_data *meta)
+{
+	int			i;
+	int			prev;
+	t_stacks	*stack;
+
+	i = 0;
+	if (meta->first_b != NULL)
+		return (0);
+	stack = meta->first_a;
+	prev = stack->value;
+	while (stack)
+	{
+		if (prev > stack->value)
+			return (0);
+		i++;
+		prev = stack->value;
+		stack = stack->next;
+	}
+	return (1);
+}
 
 int	ft_list_size(t_stacks *first_node)
 {
@@ -25,25 +47,4 @@ int	ft_list_size(t_stacks *first_node)
 		node = node->next;
 	}
 	return (i);
-}
-
-t_stacks	*ft_select_stack(t_meta_data *meta, char ab)
-{
-	t_stacks	*stack;
-
-	if (ab == 'a')
-		stack = meta->first_a;
-	else
-		stack = meta->first_b;
-	return (stack);
-}
-
-t_stacks	*ft_last_node(t_meta_data *meta, char ab)
-{
-	t_stacks	*node;
-
-	node = ft_select_stack(meta, ab);
-	while (node->next != NULL)
-		node = node->next;
-	return (node);
 }

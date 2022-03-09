@@ -17,8 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <stdio.h>
-# include "../libft/libft.h"
+# include "../../libft/libft.h"
 
 typedef struct s_stacks
 {
@@ -28,21 +27,37 @@ typedef struct s_stacks
 
 typedef struct s_meta_data
 {
-	int					size;
-	int					min_val;
-	int					max_val;
-	int					moves;
-	int					sim;
-	int					cuts;
 	struct s_stacks		*first_a;
 	struct s_stacks		*first_b;
-	struct s_stacks		*sub_stack;
-	struct s_stacks		*pivot;
 }	t_meta_data;
 
 char	*get_next_line(int fd);
 char	*ft_substr_gnl(char *s, int start, int len, int *nl_len);
 char	*ft_strjoin_gnl(char *s1, char *s2, int bytes, int *nl_len);
 
+void		ft_swap_action(t_meta_data *meta, char ab);
+void		ft_rotate_action(t_meta_data *meta, char ab);
+void		ft_reverse_rotate_action(t_meta_data *meta, char ab);
+void		ft_push_action(t_meta_data *meta, char ab);
+int			ft_do_push(t_meta_data *meta, char ab);
+int			ft_do_rotate(t_meta_data *meta, char ab);
+int			ft_do_reverse_rotate(t_meta_data *meta, char ab);
+int			ft_do_swap(t_meta_data *meta, char ab);
+int			ft_get_command(t_meta_data *meta, char *line);
+int			ft_clear_split(char **split);
+int			ft_clear_all(t_meta_data *meta);
+t_meta_data	*ft_meta_data_init(void);
+int			ft_load_stack(char **input, int init, t_meta_data *meta);
+int			ft_send_to_atoi(char *str);
+int			ft_check_solve(t_meta_data *meta);
+int			ft_list_size(t_stacks *first_node);
+
+/*
+t_meta_data	*ft_meta_data_init(void);
+int	ft_load_stack(char **input, int init, t_meta_data *meta);
+
+int	ft_clear_split(char **split);
+int	ft_clear_all(t_meta_data *meta);
+*/
 
 #endif

@@ -20,33 +20,36 @@ static int	ft_start_cuts(t_meta_data *meta)
 		return (20);
 	if (meta->size > 50 && meta->size <= 200)
 		return (25);
-	if (meta->size > 200 && meta->size <= 500)
+	if (meta->size > 200 && meta->size <= 300)
+		return (35);
+	if (meta->size > 300 && meta->size <= 500)
 		return (45);
 	if (meta->size > 500)
-		return (75);
-	return (meta->size / 4);
+		return (80);
+	return (meta->size / 6);
 }
 
 static t_meta_data	*ft_copy_stacks_nodes(t_meta_data *meta, t_meta_data *dest)
 {
 	t_stacks	*stack;
 	t_stacks	*node;
+	t_stacks	*new;
 
 	node = meta->first_a;
 	while (node)
 	{
+		new = ft_create_elem(node->value, dest);
+		if (new == NULL)
+			return (NULL);
 		if (dest->first_a == NULL)
 		{
-			stack = ft_create_elem(node->value, dest);
-			if (stack == NULL)
-				return (NULL);
+			stack = new;
+			dest->first_a = stack;
 		}
 		else
 		{
-			stack->next = ft_create_elem(node->value, dest);
+			stack->next = new;
 			stack = stack->next;
-			if (stack == NULL)
-				return (NULL);
 		}
 		node = node->next;
 	}
@@ -89,14 +92,11 @@ int	ft_find_best_pivot(t_meta_data *meta)
 	min_cut = 0;
 	start = ft_start_cuts(meta);
 	meta->cuts = start;
-	while (start < meta->cuts * 3)
+	while (start < meta->size && start < meta->cuts * 2)
 	{
-		ft_putendl_fd("entramos aqui...\n", STDOUT_FILENO);
 		copy = ft_test_pivot(meta, start);
 		if (copy == NULL)
 			return (ft_clear_all(copy));
-		ft_putnbr_fd(copy->moves, STDOUT_FILENO);
-		ft_putendl_fd("\n", STDOUT_FILENO);
 		if (min == 0 || copy->moves < min)
 		{
 			min = copy->moves;

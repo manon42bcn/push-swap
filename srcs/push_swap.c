@@ -12,13 +12,52 @@
 
 #include "../inc/push_swap.h"
 
+int ft_check_input_limits(char **input, int init)
+{
+	int	i;
+
+	i = init;
+	while (input[i])
+	{
+		if (ft_send_to_atoi(input[i]) != 1)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int ft_loader_select(int argc, char *argv[], t_meta_data *meta)
+{
+	char	**list;
+	
+	if (argc == 1)
+	{
+		list = ft_split(argv[1], ' ');
+		if (list == NULL)
+			return(0);
+		if (ft_check_input_limits(list, 0) == 0)
+			return (ft_clear_split(list));
+		if (ft_load_stack(list, 0, meta) == 0)
+			return (ft_clear_split(list) + ft_clear_all(meta));
+		return (1);
+	}
+	else
+	{
+		if (ft_check_input_limits(argv, 1) == 0)
+			return (0);
+		if (ft_load_stack(argv, 1, meta) == 0)
+			return (ft_clear_all(meta));
+		return (1);
+	}
+}
+
 int	ft_process_list(int argc, char *argv[])
 {
 	t_meta_data	*meta;
 
 	meta = ft_meta_data_init();
-	if (ft_load_stack(argc, argv, meta) == 0)
-		return (ft_clear_all(meta));
+	if (ft_loader_select(argc, argv, meta) == 0)
+		return (0);
 	if (ft_check_solve(meta) == 1)
 		return (ft_clear_all(meta) + 1);
 	ft_find_best_pivot(meta);

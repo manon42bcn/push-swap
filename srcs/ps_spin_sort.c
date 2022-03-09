@@ -70,9 +70,9 @@ static int	ft_spin(t_meta_data *meta)
 	int	size;
 	int	prepare;
 
-	size = ft_list_size(meta->first_a);
 	if (meta->first_a == NULL)
 		return (ft_do_push(meta, 'b'));
+	size = ft_list_size(meta->first_a);
 	prepare = ft_prepare_spin(meta);
 	index = ft_find_place(meta, meta->first_b->value);
 	if (index < 0)

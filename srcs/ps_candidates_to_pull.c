@@ -51,7 +51,6 @@ static int	ft_best_candidate(t_meta_data *meta)
 		candidate = candidate->next;
 		i++;
 	}
-	printf("%i best...\n", best);
 	return (best);
 }
 
@@ -59,20 +58,17 @@ int	ft_prepare_spin(t_meta_data *meta)
 {
 	int	spin_best;
 	int	index;
-	int	size;
 
 	spin_best = ft_best_candidate(meta);
 	if (spin_best == meta->first_b->value)
 		return (0);
-	index = ft_get_index_from_value(meta, 'b', spin_best);
-	if (index == 1)
-		return (0);
-	size = ft_list_size(meta->first_b);
-	if (index > size / 2)
+	index = ft_fix_distance_candidate(meta,
+			ft_get_index_from_value(meta, 'b', spin_best));
+	if (index < 0)
 	{
-		index = size - index + 1;
+		index = index * -1;
 		return (ft_do_while(meta, index, 'b', &ft_do_reverse_rotate));
 	}
 	else
-		return (ft_do_while(meta, --index, 'b', &ft_do_rotate));
+		return (ft_do_while(meta, index, 'b', &ft_do_rotate));
 }
