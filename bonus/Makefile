@@ -19,6 +19,7 @@ SRCS_FILES	 =	ch_actions.c \
 				ch_do_actions.c \
 				ch_loading_checks.c \
 				ch_loading_utils.c \
+				ch_process_inputs.c \
 				ch_utils.c \
 				get_next_line.c \
 				get_next_line_utils.c \

@@ -85,11 +85,9 @@ int	ft_load_stack(char **input, int init, t_meta_data *meta)
 	i = init;
 	while (input[i])
 	{
-		if (ft_send_to_atoi(input[i]) != 1)
-			return (ft_clear_all(meta));
 		new = ft_create_elem(ft_atoi(input[i]), meta);
 		if (new == NULL)
-			return (ft_clear_all(meta));
+			return (0);
 		if (meta->first_a == NULL)
 		{
 			stack = new;

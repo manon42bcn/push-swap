@@ -36,18 +36,23 @@ static void	ft_clear_nodes(t_stacks *node)
 static void	ft_clear_stack(t_meta_data *meta)
 {
 	if (meta)
-	{
-		meta->first_a = NULL;
-		meta->first_b = NULL;
-		meta->pivot = NULL;
 		free (meta);
-	}
 }
 
 int	ft_clear_split(char **split)
 {
+	int	i;
+
+	i = 0;
 	if (split)
+	{
+		while (split[i])
+		i++;
+		while (i-- > 0)
+			free (split[i]);
+		i++;
 		free (split);
+	}
 	return (0);
 }
 
@@ -57,7 +62,7 @@ int	ft_clear_all(t_meta_data *meta)
 	{
 		ft_clear_nodes(meta->first_a);
 		ft_clear_nodes(meta->first_b);
-		ft_clear_nodes(meta->first_b);
+		ft_clear_nodes(meta->pivot);
 		ft_clear_stack(meta);
 	}
 	return (0);

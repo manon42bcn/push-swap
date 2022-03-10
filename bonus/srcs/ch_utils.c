@@ -48,3 +48,30 @@ int	ft_list_size(t_stacks *first_node)
 	}
 	return (i);
 }
+
+int	ft_check_error_solve(void)
+{
+	char	*line;
+
+	line = get_next_line(STDIN_FILENO);
+	if (!line)
+		return (1);
+	return (0);
+}
+
+void	ft_print_results(int msg, t_meta_data *meta)
+{
+	if (msg == 0)
+		ft_putendl_fd("KO", STDOUT_FILENO);
+	if (msg == 1)
+	{
+		if (meta->count == 1)
+		{
+			ft_putnbr_fd(meta->moves, STDOUT_FILENO);
+			ft_putstr_fd(" moves ", STDOUT_FILENO);
+		}
+		ft_putendl_fd("OK", STDOUT_FILENO);
+	}
+	if (msg == 2)
+		ft_putendl_fd("Error", STDERR_FILENO);
+}

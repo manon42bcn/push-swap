@@ -45,8 +45,18 @@ static void	ft_clear_stack(t_meta_data *meta)
 
 int	ft_clear_split(char **split)
 {
-	if (split)
-		free (split);
+	int	i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	if (split[0])
+	{
+		while (i-- > 0)
+			free (split[i]);
+		i++;
+	}
+	free (split);
 	return (0);
 }
 

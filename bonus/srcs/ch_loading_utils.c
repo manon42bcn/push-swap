@@ -45,6 +45,25 @@ static t_stacks	*ft_create_elem(t_meta_data *meta, int value)
 	return (node);
 }
 
+int	ft_check_input_limits(char **input, t_meta_data *meta)
+{
+	int	i;
+
+	if (ft_strncmp(input[meta->init], "--count", 7) == 0)
+	{
+		meta->count = 1;
+		meta->init++;
+	}
+	i = meta->init;
+	while (input[i])
+	{
+		if (ft_send_to_atoi(input[i]) != 1)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 t_meta_data	*ft_meta_data_init(void)
 {
 	t_meta_data	*rst;
@@ -52,25 +71,29 @@ t_meta_data	*ft_meta_data_init(void)
 	rst = (t_meta_data *)malloc(sizeof(t_meta_data));
 	if (rst == NULL)
 		return (NULL);
+	rst->moves = 0;
+	rst->error = 0;
+	rst->count = 0;
+	rst->init = 0;
 	rst->first_a = NULL;
 	rst->first_b = NULL;
 	return (rst);
 }
 
-int	ft_load_stack(char **input, int init, t_meta_data *meta)
+int	ft_load_stack(char **input, t_meta_data *meta)
 {
 	int			i;
 	t_stacks	*stack;
 	t_stacks	*new;
 
-	i = init;
+	i = meta->init;
 	while (input[i])
 	{
 		if (ft_send_to_atoi(input[i]) != 1)
-			return (ft_clear_all(meta));
+			return (0);
 		new = ft_create_elem(meta, ft_atoi(input[i]));
 		if (new == NULL)
-			return (ft_clear_all(meta));
+			return (0);
 		if (meta->first_a == NULL)
 		{
 			stack = new;

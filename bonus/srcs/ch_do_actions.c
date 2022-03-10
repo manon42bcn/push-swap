@@ -16,12 +16,12 @@ int	ft_do_push(t_meta_data *meta, char ab)
 {
 	if (ab == 'a')
 	{
-		ft_push_action(meta, 'a');
+		ft_push_action(meta, 'b');
 		return (1);
 	}
 	else if (ab == 'b')
 	{
-		ft_push_action(meta, 'b');
+		ft_push_action(meta, 'a');
 		return (1);
 	}
 	return (0);
@@ -53,7 +53,6 @@ int	ft_do_reverse_rotate(t_meta_data *meta, char ab)
 	if (ab == 'a')
 	{
 		ft_reverse_rotate_action(meta, 'a');
-
 		return (1);
 	}
 	else if (ab == 'b')
@@ -91,13 +90,10 @@ int	ft_do_swap(t_meta_data *meta, char ab)
 	return (0);
 }
 
-int ft_get_command(t_meta_data *meta, char *line)
+int	ft_get_command(t_meta_data *meta, char *line)
 {
 	if (ft_strlen(line) > 3)
-	{
-		printf("%c\n", (char)(ft_strncmp(line, "rr", 3)));
 		return (ft_do_reverse_rotate(meta, (char)(ft_strncmp(line, "rr", 3))));
-	}
 	else
 	{
 		if (line[0] == 'p')
