@@ -37,6 +37,8 @@ int	main(int argc, char *argv[])
 {
 	t_meta_data	*meta;
 
+	if (argc == 1)
+		return (0);
 	meta = ft_meta_data_init();
 	if (meta == NULL)
 		return (0);

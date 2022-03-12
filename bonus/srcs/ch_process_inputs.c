@@ -55,7 +55,7 @@ void	ft_process_commands(int argc, t_meta_data *meta)
 	while (argc)
 	{
 		line = get_next_line(STDIN_FILENO);
-		if (!line)
+		if (!line || ft_strncmp(line, "\n", 1) == 0)
 			break ;
 		i++;
 		ft_get_command(meta, line);

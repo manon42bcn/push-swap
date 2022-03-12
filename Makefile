@@ -42,7 +42,7 @@ INCLUDES	 =	-Iinc/push_swap.h
 all: $(NAME)
  
 $(NAME): $(OBJS) $(LIB_DIR)$(LIB)
-	$(CC) $(CFLAGS) -g -o $(NAME) $(OBJS) $(LIB_DIR)$(LIB)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB_DIR)$(LIB)
 
 $(OBJS): $(SRCS)
 	$(CC) $(CFLAGS) -c $(SRCS) $(INCLUDES)

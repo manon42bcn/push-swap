@@ -105,7 +105,7 @@ int	ft_presort_at_b(t_meta_data *meta)
 	t_stacks	*pivot_stack;
 	t_stacks	*tmp_pivot;
 
-	if (meta->first_a == NULL || ft_list_size(meta->first_a) == 1)
+	if (ft_list_size(meta->first_a) == 1 || meta->first_a == NULL)
 		return (0);
 	pivot_stack = ft_get_node_from_value(meta, 'a', meta->pivot->value);
 	if (ft_min_at_stack(meta, 'a')

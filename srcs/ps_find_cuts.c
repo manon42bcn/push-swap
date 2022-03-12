@@ -14,9 +14,9 @@
 
 static int	ft_start_cuts(t_meta_data *meta)
 {
-	if (meta->size <= 20)
-		return (20);
-	if (meta->size > 20 && meta->size <= 50)
+	if (meta->size <= 19)
+		return (meta->size / 2);
+	if (meta->size > 19 && meta->size <= 50)
 		return (20);
 	if (meta->size > 50 && meta->size <= 200)
 		return (25);

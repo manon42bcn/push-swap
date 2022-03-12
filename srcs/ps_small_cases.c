@@ -82,7 +82,7 @@ static int	ft_case_five(t_meta_data *meta, char ab)
 	if (ft_check_solve_stack(meta, ab) == 1)
 		return (0);
 	if (ft_list_size(stack) == 3)
-		return (ft_case_four(meta, ab)
+		return (ft_case_three(meta, ab)
 			+ ft_pulling_back_all_stack(meta));
 	min = ft_min_at_stack(meta, ab);
 	if (min == 1)
