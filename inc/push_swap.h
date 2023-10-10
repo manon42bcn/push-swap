@@ -17,12 +17,62 @@
 # include <unistd.h>
 # include "../libft/inc/libft.h"
 
+/**
+ * @struct t_stacks
+ * @brief  Node structure representing each element in the stack.
+ *
+ * Each node in the stack contains an integer value and a pointer to the
+ * next node in the stack.
+ *
+ * @var t_stacks::value
+ * The integer value of the node.
+ *
+ * @var t_stacks::next
+ * A pointer to the next node in the stack. If this is the last node in
+ * the stack, this pointer will be NULL.
+ */
 typedef struct s_stacks
 {
 	int				value;
 	struct s_stacks	*next;
 }	t_stacks;
 
+/**
+ * @struct t_meta_data
+ * @brief  Contains meta data and pointers to the main stacks used in the
+ * program.
+ *
+ * This structure acts as the primary container for the program's data,
+ * including both the A and B stacks and various meta information about
+ * the current state of the sorting algorithm.
+ *
+ * @var t_meta_data::size
+ * Total size or number of elements in stack A.
+ *
+ * @var t_meta_data::min_val
+ * The smallest integer value across both stacks.
+ *
+ * @var t_meta_data::max_val
+ * The largest integer value across both stacks.
+ *
+ * @var t_meta_data::moves
+ * The number of moves or operations performed.
+ *
+ * @var t_meta_data::sim
+ * [Description for this variable]
+ *
+ * @var t_meta_data::cuts
+ * [Description for this variable]
+ *
+ * @var t_meta_data::first_a
+ * A pointer to the first node in stack A.
+ *
+ * @var t_meta_data::first_b
+ * A pointer to the first node in stack B.
+ *
+ * @var t_meta_data::pivot
+ * A pointer to the pivot node, useful in certain sorting techniques.
+ */
 typedef struct s_meta_data
 {
 	int					size;

@@ -79,6 +79,7 @@ Max:     5028
 ```
 Is slow with big stacks, but is good!
 I'm pretty sure that this implementation can be improved, specially around presort step.
+The Makefile is not properly adapted to work with libft-extended, so some relink can be founded.
 
 ## Stack (Data Structure in C)
 
@@ -211,3 +212,40 @@ At the end of the list, stack a should be sorted. That's it!
 - **Command Processing**: Reads and processes a list of commands to manipulate the stacks, keeping track of the total number of operations.
 
 - **Input Validation**: Checks if the inputs are valid numbers and ensures no duplicates exist.
+
+## Generating Documentation with Doxygen
+
+To generate detailed, and more friendly documentation for this project, follow the steps outlined below:
+
+### 1. Install Doxygen:
+   
+If you haven't already installed Doxygen, you can do so using your system's package manager.
+
+* Debian/Ubuntu-based systems:
+
+```bash
+sudo apt-get install doxygen
+```
+
+* On macOS:
+
+```bash
+brew install doxygen
+```
+
+### 2. Generate the Documentation:
+
+From the root directory of the project, where the `Doxyfile` is located, run:
+
+```bash
+doxygen Doxyfile
+```
+
+### 3. View the Documentation:
+
+Once Doxygen completes the documentation generation, you can view it by opening the `html/index.html` file in your preferred web browser:
+
+```bash
+open docs/html/index.html   # On macOS
+xdg-open docs/html/index.html   # On Linux systems
+```

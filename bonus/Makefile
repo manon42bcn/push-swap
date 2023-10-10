@@ -21,8 +21,6 @@ SRCS_FILES	 =	ch_actions.c \
 				ch_loading_utils.c \
 				ch_process_inputs.c \
 				ch_utils.c \
-				get_next_line.c \
-				get_next_line_utils.c \
 				ps_checker.c
 SRCS 		 =	$(addprefix $(SRC_DIR)/,$(SRCS_FILES))
 OBJS		 =	$(SRCS_FILES:.c=.o)
@@ -39,7 +37,7 @@ $(NAME): $(OBJS) $(LIB_DIR)$(LIB)
 	mv $(NAME) ../
 
 $(OBJS): $(SRCS)
-	$(CC) $(CFLAGS) -c -D BUFFER_SIZE=100 $(SRCS) $(INCLUDES)
+	$(CC) $(CFLAGS) -c $(SRCS) $(INCLUDES)
 
 $(LIB_DIR)$(LIB):
 	$(MAKE) bonus -C $(LIB_DIR)

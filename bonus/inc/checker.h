@@ -25,6 +25,34 @@ typedef struct s_stacks
 	struct s_stacks	*next;
 }	t_stacks;
 
+/**
+ * @struct t_meta_data
+ * @brief  Contains meta data and pointers to the main stacks used in
+ * the program.
+ *
+ * This structure acts as the primary container for the program's data,
+ * including both the A and B stacks and various meta information about
+ * the current state of the sorting algorithm.
+ *
+ * @var t_meta_data::moves
+ * The number of moves or operations performed during the sorting.
+ *
+ * @var t_meta_data::error
+ * Flag indicating if an error has occurred (1 if yes, 0 otherwise).
+ *
+ * @var t_meta_data::count
+ * [Description for this variable, perhaps indicating how many times 
+ * a certain operation or check has been done.]
+ *
+ * @var t_meta_data::init
+ * An initializer or starting value for certain operations.
+ *
+ * @var t_meta_data::first_a
+ * A pointer to the first node in stack A.
+ *
+ * @var t_meta_data::first_b
+ * A pointer to the first node in stack B.
+ */
 typedef struct s_meta_data
 {
 	int					moves;
