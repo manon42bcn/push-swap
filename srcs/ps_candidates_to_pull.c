@@ -12,6 +12,17 @@
 
 #include "../inc/push_swap.h"
 
+/**
+ * @brief Adjusts the distance of a candidate for a potential action.
+ *
+ * Depending on the position of an element in stack B, calculates the 
+ * distance needed to move it to the top or bottom.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param i Index of the candidate element in stack B.
+ * 
+ * @return Adjusted distance for the candidate.
+ */
 static int	ft_fix_distance_candidate(t_meta_data *meta, int i)
 {
 	int	size;
@@ -25,6 +36,16 @@ static int	ft_fix_distance_candidate(t_meta_data *meta, int i)
 		return (--i);
 }
 
+/**
+ * @brief Identifies the best candidate element from stack B for repositioning.
+ *
+ * Determines which element from stack B requires the fewest actions 
+ * (rotations and pushes) to be correctly placed in stack A.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return The value of the best candidate from stack B.
+ */
 static int	ft_best_candidate(t_meta_data *meta)
 {
 	t_stacks	*candidate;
@@ -54,6 +75,16 @@ static int	ft_best_candidate(t_meta_data *meta)
 	return (best);
 }
 
+/**
+ * @brief Prepares the best candidate for spin.
+ *
+ * Chooses the best candidate from stack B to be repositioned and determines 
+ * the number and type of rotations required to move it to the desired position.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return The number of rotations performed. 
+ */
 int	ft_prepare_spin(t_meta_data *meta)
 {
 	int	spin_best;

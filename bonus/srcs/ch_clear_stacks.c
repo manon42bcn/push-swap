@@ -12,6 +12,11 @@
 
 #include "../inc/checker.h"
 
+/**
+ * @brief Frees the memory of the specified node and nullifies its next pointer.
+ *
+ * @param node The node to be deleted.
+ */
 static void	ft_delete_node(t_stacks *node)
 {
 	if (node)
@@ -21,6 +26,14 @@ static void	ft_delete_node(t_stacks *node)
 	}
 }
 
+/**
+ * @brief Recursively frees all nodes starting from the provided node.
+ *
+ * Iterates through the linked list and deletes each node using
+ * the ft_delete_node function.
+ *
+ * @param node The first node of the list to be cleared.
+ */
 static void	ft_clear_nodes(t_stacks *node)
 {
 	t_stacks	*tmp;
@@ -33,6 +46,14 @@ static void	ft_clear_nodes(t_stacks *node)
 	}
 }
 
+/**
+ * @brief Clears the stack metadata and nullifies the head pointers.
+ *
+ * Resets the head pointers of both stacks to NULL and frees the
+ * memory allocated to the meta structure.
+ *
+ * @param meta Pointer to the metadata structure.
+ */
 static void	ft_clear_stack(t_meta_data *meta)
 {
 	if (meta)
@@ -43,6 +64,15 @@ static void	ft_clear_stack(t_meta_data *meta)
 	}
 }
 
+/**
+ * @brief Frees all strings within a split array and then the array itself.
+ *
+ * Iterates through the split array, freeing each string, then
+ * frees the entire array.
+ *
+ * @param split Pointer to the string array.
+ * @return Returns 0 after freeing the split.
+ */
 int	ft_clear_split(char **split)
 {
 	int	i;
@@ -60,6 +90,15 @@ int	ft_clear_split(char **split)
 	return (0);
 }
 
+/**
+ * @brief Clears all nodes of both stacks and then the metadata.
+ *
+ * Calls helper functions to clear individual stack nodes and
+ * then the meta structure.
+ *
+ * @param meta Pointer to the metadata structure.
+ * @return Returns 0 after clearing all structures.
+ */
 int	ft_clear_all(t_meta_data *meta)
 {
 	if (meta)

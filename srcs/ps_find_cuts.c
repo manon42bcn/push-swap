@@ -12,6 +12,15 @@
 
 #include "../inc/push_swap.h"
 
+/**
+ * @brief Determines the starting cut based on the size of the stack.
+ *
+ * Based on the total size of the data, it returns an appropriate starting cut value.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return Starting cut value.
+ */
 static int	ft_start_cuts(t_meta_data *meta)
 {
 	if (meta->size <= 19)
@@ -29,6 +38,18 @@ static int	ft_start_cuts(t_meta_data *meta)
 	return (meta->size / 6);
 }
 
+
+/**
+ * @brief Copies the nodes from one metadata structure to another.
+ *
+ * Iteratively creates and appends nodes from the source to the destination
+ * metadata structure.
+ * 
+ * @param meta Source metadata structure containing the original stack nodes.
+ * @param dest Destination metadata structure to which nodes will be copied.
+ * 
+ * @return Returns the updated destination metadata structure.
+ */
 static t_meta_data	*ft_copy_stacks_nodes(t_meta_data *meta, t_meta_data *dest)
 {
 	t_stacks	*stack;
@@ -56,6 +77,16 @@ static t_meta_data	*ft_copy_stacks_nodes(t_meta_data *meta, t_meta_data *dest)
 	return (dest);
 }
 
+/**
+ * @brief Creates a copy of the stacks from a given metadata structure.
+ *
+ * Initializes a new metadata structure and copies the nodes from the source
+ * structure.
+ * 
+ * @param meta Source metadata structure containing stack information.
+ * 
+ * @return Returns a new metadata structure with copied stacks.
+ */
 static t_meta_data	*ft_copy_stacks(t_meta_data *meta)
 {
 	t_meta_data	*rst;
@@ -67,6 +98,16 @@ static t_meta_data	*ft_copy_stacks(t_meta_data *meta)
 	return (rst);
 }
 
+/**
+ * @brief Tests a potential pivot for the stack sorting.
+ *
+ * Makes a copy of the stacks and tests sorting with a specified cut value.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param cut Cut value to test.
+ * 
+ * @return Returns a new metadata structure after performing test sort.
+ */
 static t_meta_data	*ft_test_pivot(t_meta_data *meta, int cut)
 {
 	t_meta_data	*copy;
@@ -81,6 +122,16 @@ static t_meta_data	*ft_test_pivot(t_meta_data *meta, int cut)
 	return (copy);
 }
 
+/**
+ * @brief Determines the best pivot for stack sorting.
+ *
+ * Iteratively tests different pivot values and selects the one that yields
+ * the minimum number of sorting moves.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return Returns 1 upon successful determination.
+ */
 int	ft_find_best_pivot(t_meta_data *meta)
 {
 	t_meta_data	*copy;

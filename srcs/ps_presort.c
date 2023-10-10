@@ -12,6 +12,16 @@
 
 #include "../inc/push_swap.h"
 
+/**
+ * @brief Determines the next index to cut in stack A.
+ * 
+ * Iterates through stack A and computes the number of moves required to
+ * push the next value below the pivot value.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return Returns the number of moves needed to access the next cut.
+ */
 static int	ft_next_at_cut(t_meta_data *meta)
 {
 	t_stacks	*node;
@@ -39,6 +49,16 @@ static int	ft_next_at_cut(t_meta_data *meta)
 		return (up_dw[0] - 1);
 }
 
+/**
+ * @brief Determines and performs the required rotations to send the next element.
+ *
+ * Computes the next rotation operation (either rotate or reverse rotate)
+ * for the element to be pushed from stack A.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return Returns the number of moves performed.
+ */
 static int	ft_next_to_send(t_meta_data *meta)
 {
 	int			distance;
@@ -57,6 +77,16 @@ static int	ft_next_to_send(t_meta_data *meta)
 		return (ft_do_while(meta, distance, 'a', &ft_do_rotate));
 }
 
+/**
+ * @brief Determines the middle value of a given stack.
+ *
+ * Iterates through the selected stack to find the middle value.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Char indicating which stack to fetch from ('a' or 'b').
+ * 
+ * @return Returns the index of the middle value.
+ */
 static int	ft_middle_point(t_meta_data *meta, char ab)
 {
 	t_stacks	*node;
@@ -77,6 +107,16 @@ static int	ft_middle_point(t_meta_data *meta, char ab)
 	return (node_index);
 }
 
+/**
+ * @brief Performs the rotation required for stack B based on its size.
+ *
+ * Depending on the size of stack B, the function may decide to do a single
+ * rotation on stack A, a single rotation on stack B, or no operation.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return Returns the number of moves performed.
+ */
 static int	ft_spin_pivot_b(t_meta_data *meta)
 {
 	t_stacks	*pivot_b;
@@ -100,6 +140,17 @@ static int	ft_spin_pivot_b(t_meta_data *meta)
 	return (0);
 }
 
+/**
+ * @brief Performs the pre-sorting operations on stack B.
+ *
+ * Iterates through stack A to decide if values should be pushed to stack B.
+ * Based on pivot values and current stack contents, different operations
+ * might be performed to prepare stack B for further sorting.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return Returns the number of moves performed.
+ */
 int	ft_presort_at_b(t_meta_data *meta)
 {
 	t_stacks	*pivot_stack;

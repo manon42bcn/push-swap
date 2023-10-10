@@ -10,12 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @brief Checks if a character is a printable whitespace.
+ *
+ * @param c Character to check.
+ * @return Returns 1 if the character is a whitespace, 0 otherwise.
+ */
 static int	ft_atoi_isprint(char c)
 {
 	return (c == ' ' || c == '\f' || c == '\n'
 		|| c == '\r' || c == '\v' || c == '\t');
 }
 
+/**
+ * @brief Processes spaces and potential sign characters in the string.
+ *
+ * Skips over whitespace characters and updates the pointer accordingly.
+ * Also handles the presence of a '+' or '-' sign at the beginning of the string.
+ *
+ * @param str Input string.
+ * @param i Pointer to the current index in the string.
+ * @param rst Pointer to the current result value.
+ */
 static void	ft_atoi_spaces(char *str, int *i, long long int *rst)
 {
 	while (ft_atoi_isprint(str[*(i)]) == 1)
@@ -28,6 +44,16 @@ static void	ft_atoi_spaces(char *str, int *i, long long int *rst)
 	}
 }
 
+/**
+ * @brief Tests the validity of the resulting integer conversion.
+ *
+ * Ensures the integer value being constructed doesn't exceed
+ * the bounds of an int type. Takes into account potential sign.
+ *
+ * @param rst Pointer to an array containing the current result and sign.
+ * @param c Current character being processed.
+ * @return Returns 1 if the conversion is valid, 0 or -1 otherwise.
+ */
 static int	ft_atoi_test(long long int *rst, char c)
 {
 	long long int	test;
@@ -48,6 +74,16 @@ static int	ft_atoi_test(long long int *rst, char c)
 	return (1);
 }
 
+/**
+ * @brief Converts a string to an integer, ensuring the conversion is valid.
+ *
+ * Processes the string, ensuring the characters are valid for integer
+ * conversion and that the resulting integer doesn't exceed the bounds
+ * of the int type.
+ *
+ * @param str Input string.
+ * @return Returns 1 if the conversion was successful, 0 or -1 otherwise.
+ */
 int	ft_send_to_atoi(char *str)
 {	
 	long long int	rst[3];

@@ -12,6 +12,14 @@
 
 #include "../inc/push_swap.h"
 
+/**
+ * @brief Finds the position of the maximum value in the given stack.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Indicates which stack to process ('a' or 'b').
+ * 
+ * @return Returns the position of the maximum value.
+ */
 int	ft_max_at_stack(t_meta_data *meta, char ab)
 {
 	t_stacks	*node;
@@ -38,6 +46,14 @@ int	ft_max_at_stack(t_meta_data *meta, char ab)
 	return (rst);
 }
 
+/**
+ * @brief Finds the position of the minimum value in the given stack.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Indicates which stack to process ('a' or 'b').
+ * 
+ * @return Returns the position of the minimum value.
+ */
 int	ft_min_at_stack(t_meta_data *meta, char ab)
 {
 	t_stacks	*node;
@@ -64,6 +80,16 @@ int	ft_min_at_stack(t_meta_data *meta, char ab)
 	return (rst);
 }
 
+/**
+ * @brief Finds the position of the next greater number than the one at 
+ * the given index.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Indicates which stack to process ('a' or 'b').
+ * @param index Index of the current number to check against.
+ * 
+ * @return Returns the position of the next greater number.
+ */
 int	ft_find_next(t_meta_data *meta, char ab, int index)
 {
 	t_stacks	*node;
@@ -89,6 +115,16 @@ int	ft_find_next(t_meta_data *meta, char ab, int index)
 	return (index);
 }
 
+/**
+ * @brief Finds the position of the previous smaller number than the one 
+ * at the given index.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Indicates which stack to process ('a' or 'b').
+ * @param index Index of the current number to check against.
+ * 
+ * @return Returns the position of the previous smaller number.
+ */
 int	ft_find_prev(t_meta_data *meta, char ab, int index)
 {
 	t_stacks	*node;
@@ -114,6 +150,14 @@ int	ft_find_prev(t_meta_data *meta, char ab, int index)
 	return (index);
 }
 
+/**
+ * @brief Gets the last node in the given stack.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Indicates which stack to process ('a' or 'b').
+ * 
+ * @return Returns the pointer to the last node.
+ */
 t_stacks	*ft_last_node(t_meta_data *meta, char ab)
 {
 	t_stacks	*node;

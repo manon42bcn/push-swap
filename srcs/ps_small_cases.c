@@ -12,6 +12,14 @@
 
 #include "../inc/push_swap.h"
 
+/**
+ * @brief Sorts a stack with two elements.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Indicates which stack to process ('a' or 'b').
+ * 
+ * @return Returns the number of operations performed.
+ */
 static int	ft_case_two(t_meta_data *meta, char ab)
 {
 	t_stacks	*node;
@@ -24,6 +32,14 @@ static int	ft_case_two(t_meta_data *meta, char ab)
 	return (0);
 }
 
+/**
+ * @brief Sorts a stack with three elements.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Indicates which stack to process ('a' or 'b').
+ * 
+ * @return Returns the number of operations performed.
+ */
 static int	ft_case_three(t_meta_data *meta, char ab)
 {
 	int			max;
@@ -39,6 +55,14 @@ static int	ft_case_three(t_meta_data *meta, char ab)
 		return (ft_case_two(meta, ab));
 }
 
+/**
+ * @brief Sorts a stack with four elements.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Indicates which stack to process ('a' or 'b').
+ * 
+ * @return Returns the number of operations performed.
+ */
 static int	ft_case_four(t_meta_data *meta, char ab)
 {
 	int			rst;
@@ -66,6 +90,14 @@ static int	ft_case_four(t_meta_data *meta, char ab)
 		return (ft_do_swap(meta, ab) + ft_case_four(meta, ab));
 }
 
+/**
+ * @brief Sorts a stack with five elements.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Indicates which stack to process ('a' or 'b').
+ * 
+ * @return Returns the number of operations performed.
+ */
 static int	ft_case_five(t_meta_data *meta, char ab)
 {
 	t_stacks	*stack;
@@ -94,6 +126,17 @@ static int	ft_case_five(t_meta_data *meta, char ab)
 		return (ft_do_reverse_rotate(meta, ab) + ft_case_five(meta, ab));
 }
 
+/**
+ * @brief Handles sorting for small stack sizes (up to 5 elements).
+ * 
+ * Based on the size of the given stack, directs to the appropriate sorting 
+ * function to handle the specified size.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Indicates which stack to process ('a' or 'b').
+ * 
+ * @return Returns the number of operations performed.
+ */
 int	ft_small_cases(t_meta_data *meta, char ab)
 {
 	int	size;

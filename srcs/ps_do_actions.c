@@ -12,6 +12,17 @@
 
 #include "../inc/push_swap.h"
 
+/**
+ * @brief Executes the 'push' action and optionally prints the action.
+ *
+ * Based on the specified stack (A or B), pushes an element from one stack 
+ * to the other and prints the executed action to the standard output.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Character indicating which stack to push from.
+ * 
+ * @return Returns 1 if the action was executed, 0 otherwise.
+ */
 int	ft_do_push(t_meta_data *meta, char ab)
 {
 	if (ab == 'a')
@@ -31,6 +42,17 @@ int	ft_do_push(t_meta_data *meta, char ab)
 	return (0);
 }
 
+/**
+ * @brief Executes the 'rotate' action and optionally prints the action.
+ *
+ * Based on the specified stack (A, B, or both), rotates the elements 
+ * and prints the executed action to the standard output.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Character indicating which stack to perform the rotation on.
+ * 
+ * @return Returns 1 if the action was executed, 0 otherwise.
+ */
 int	ft_do_rotate(t_meta_data *meta, char ab)
 {
 	if (ab == 'a')
@@ -58,6 +80,17 @@ int	ft_do_rotate(t_meta_data *meta, char ab)
 	return (0);
 }
 
+/**
+ * @brief Executes the 'reverse rotate' action and optionally prints the action.
+ *
+ * Based on the specified stack (A, B, or both), performs the reverse rotation 
+ * of elements and prints the executed action to the standard output.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Character indicating which stack to perform the reverse rotation on.
+ * 
+ * @return Returns 1 if the action was executed, 0 otherwise.
+ */
 int	ft_do_reverse_rotate(t_meta_data *meta, char ab)
 {
 	if (ab == 'a')
@@ -85,6 +118,17 @@ int	ft_do_reverse_rotate(t_meta_data *meta, char ab)
 	return (0);
 }
 
+/**
+ * @brief Executes the 'swap' action and optionally prints the action.
+ *
+ * Based on the specified stack (A, B, or both), swaps the top elements 
+ * and prints the executed action to the standard output.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Character indicating which stack to perform the swap on.
+ * 
+ * @return Returns 1 if the action was executed, 0 otherwise.
+ */
 int	ft_do_swap(t_meta_data *meta, char ab)
 {
 	if (ab == 'a')
@@ -112,6 +156,18 @@ int	ft_do_swap(t_meta_data *meta, char ab)
 	return (0);
 }
 
+/**
+ * @brief Executes a specific action a set number of times.
+ *
+ * The specified action is executed 'i' times on the chosen stack.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param i The number of times to execute the action.
+ * @param ab Character indicating which stack the action applies to.
+ * @param act The function pointer to the action to be executed.
+ * 
+ * @return Returns the sum of the results of the executed actions.
+ */
 int	ft_do_while(t_meta_data *meta, int i, char ab,
 	int (*act)(t_meta_data *, char))
 {

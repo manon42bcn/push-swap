@@ -12,6 +12,16 @@
 
 #include "../inc/push_swap.h"
 
+/**
+ * @brief Checks if the input values are within valid limits.
+ *
+ * Iterates through the input strings and checks if they are valid integers.
+ * 
+ * @param input Array of strings to check.
+ * @param init Starting index in the input array.
+ * 
+ * @return Returns 1 if all strings are valid integers, 0 otherwise.
+ */
 int	ft_check_input_limits(char **input, int init)
 {
 	int	i;
@@ -26,6 +36,19 @@ int	ft_check_input_limits(char **input, int init)
 	return (1);
 }
 
+/**
+ * @brief Determines the method to load the data into the stack.
+ *
+ * If the argument count equals 2, it splits the input string and loads it
+ * into the stack. If the argument count is greater, it checks each argument
+ * for input limits and loads them directly into the stack.
+ * 
+ * @param argc Argument count.
+ * @param argv Argument vector.
+ * @param meta Metadata structure.
+ * 
+ * @return Returns 1 if loading was successful, 0 otherwise.
+ */
 int	ft_loader_select(int argc, char *argv[], t_meta_data *meta)
 {
 	char	**list;
@@ -52,6 +75,18 @@ int	ft_loader_select(int argc, char *argv[], t_meta_data *meta)
 	}
 }
 
+/**
+ * @brief Processes the input list for the swap operation.
+ *
+ * Checks the input values and performs the necessary operations to prepare
+ * and optimize the list for the swap operation.
+ * 
+ * @param argc Argument count.
+ * @param argv Argument vector.
+ * @param meta Metadata structure.
+ * 
+ * @return Returns 1 if the process was successful, 0 otherwise.
+ */
 int	ft_process_list(int argc, char *argv[], t_meta_data *meta)
 {
 	if (ft_loader_select(argc, argv, meta) == 0)
@@ -68,6 +103,17 @@ int	ft_process_list(int argc, char *argv[], t_meta_data *meta)
 	return (1);
 }
 
+/**
+ * @brief Main function of the pusw_swap project.
+ *
+ * Initializes metadata and processes the input list. Outputs an error to 
+ * STDERR if processing fails.
+ * 
+ * @param argc Argument count.
+ * @param argv Argument vector.
+ * 
+ * @return Returns 0 in all cases.
+ */
 int	main(int argc, char *argv[])
 {
 	t_meta_data	*meta;

@@ -12,6 +12,16 @@
 
 #include "../inc/checker.h"
 
+/**
+ * @brief Evaluate if there are any errors in the metadata.
+ *
+ * This function checks for any errors in the metadata and based on the error
+ * condition, prints appropriate results.
+ *
+ * @param meta Pointer to metadata.
+ * @return Returns 0 if there's an error or the meta data indicates a solved
+ * state; otherwise, it returns 1.
+ */
 static int	ft_evaluate_errors(t_meta_data *meta)
 {
 	if (meta->error == 1)
@@ -33,6 +43,17 @@ static int	ft_evaluate_errors(t_meta_data *meta)
 	return (1);
 }
 
+/**
+ * @brief The main function responsible for initializing and processing data.
+ *
+ * This function initializes metadata, processes the list and commands,
+ * evaluates errors, and then checks if the meta data indicates a solved state.
+ * Appropriate results are printed based on the checks.
+ *
+ * @param argc Count of arguments.
+ * @param argv Array of argument strings.
+ * @return Returns 0 in all cases after performing necessary operations.
+ */
 int	main(int argc, char *argv[])
 {
 	t_meta_data	*meta;

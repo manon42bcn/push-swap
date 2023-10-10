@@ -12,6 +12,13 @@
 
 #include "../inc/push_swap.h"
 
+/**
+ * @brief Deletes a single node from the stack.
+ *
+ * If the node exists, it sets its next pointer to NULL and frees its memory.
+ * 
+ * @param node The node from the stack to be deleted.
+ */
 void	ft_delete_node(t_stacks *node)
 {
 	if (node)
@@ -21,6 +28,13 @@ void	ft_delete_node(t_stacks *node)
 	}
 }
 
+/**
+ * @brief Clears all nodes in the stack.
+ *
+ * Iteratively deletes nodes from the stack until the entire stack is cleared.
+ * 
+ * @param node The starting node from which to begin the clearance.
+ */
 static void	ft_clear_nodes(t_stacks *node)
 {
 	t_stacks	*tmp;
@@ -33,12 +47,28 @@ static void	ft_clear_nodes(t_stacks *node)
 	}
 }
 
+/**
+ * @brief Clears the metadata structure.
+ *
+ * If the metadata structure exists, it frees its memory.
+ * 
+ * @param meta Metadata structure containing stack information.
+ */
 static void	ft_clear_stack(t_meta_data *meta)
 {
 	if (meta)
 		free (meta);
 }
 
+/**
+ * @brief Clears and frees the memory occupied by a split string array.
+ *
+ * Iteratively clears each string in the split array, then frees the entire array.
+ * 
+ * @param split The string array to be cleared.
+ * 
+ * @return Always returns 0.
+ */
 int	ft_clear_split(char **split)
 {
 	int	i;
@@ -56,6 +86,15 @@ int	ft_clear_split(char **split)
 	return (0);
 }
 
+/**
+ * @brief Clears all data structures associated with the swap project.
+ *
+ * Clears both stack A and B, the pivot, and then the metadata structure itself.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return Always returns 0.
+ */
 int	ft_clear_all(t_meta_data *meta)
 {
 	if (meta)

@@ -12,6 +12,19 @@
 
 #include "../inc/push_swap.h"
 
+/**
+ * @brief Finds the position of the smallest number that is greater than a
+ * given value in stack 'a'.
+ * 
+ * This function is useful when we want to determine the position of the 
+ * next larger value to 'value' in stack 'a'.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param value The value to compare against.
+ * 
+ * @return Returns the position of the smallest number that is greater than
+ * 'value'. If no such value exists, returns 0.
+ */
 static int	ft_to_spin_value_next(t_meta_data *meta, int value)
 {
 	t_stacks	*node;
@@ -38,6 +51,19 @@ static int	ft_to_spin_value_next(t_meta_data *meta, int value)
 	return (index);
 }
 
+/**
+ * @brief Determines the position of the largest number that is less than
+ * a given value in stack 'a'.
+ * 
+ * This function is utilized to locate the position of the immediately
+ * smaller value to 'value' in stack 'a'.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param value The number to compare with.
+ * 
+ * @return Returns the position of the largest number less than 'value'.
+ * If no such number is present, it returns 0.
+ */
 static int	ft_to_spin_value_prev(t_meta_data *meta, int value)
 {
 	t_stacks	*node;
@@ -64,6 +90,18 @@ static int	ft_to_spin_value_prev(t_meta_data *meta, int value)
 	return (index);
 }
 
+/**
+ * @brief Adjusts the position of the top element of stack 'a' and then
+ * pushes it to stack 'b'.
+ * 
+ * This function optimizes the rotation of stack 'a' so that the element 
+ * which needs to be pushed to stack 'b' reaches the top with the least
+ * number of rotations.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return The number of actions taken.
+ */
 static int	ft_spin(t_meta_data *meta)
 {
 	int	index;
@@ -89,6 +127,19 @@ static int	ft_spin(t_meta_data *meta)
 	return (0);
 }
 
+/**
+ * @brief Calculates the optimal position for placing a given value
+ * in stack 'a'.
+ * 
+ * If the value is to be placed closer to the start of the stack,
+ * a positive index is returned. If it's closer to the end, a negative
+ * index is returned.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param value The value for which position is to be found.
+ * 
+ * @return Returns the optimal position as an integer.
+ */
 int	ft_find_place(t_meta_data *meta, int value)
 {
 	int	index;
@@ -105,6 +156,17 @@ int	ft_find_place(t_meta_data *meta, int value)
 	return (index);
 }
 
+/**
+ * @brief Ensures that the elements of stack 'b' are correctly placed
+ * on stack 'a'.
+ * 
+ * This function repeatedly calls the spin function until stack 'b' is empty.
+ * After that, it ensures that stack 'a' is sorted in the right order.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return The number of actions executed.
+ */
 int	ft_spin_sort_at_a(t_meta_data *meta)
 {
 	int	rst;

@@ -12,6 +12,18 @@
 
 #include "../inc/checker.h"
 
+/**
+ * @brief Load the list of numbers into the stack.
+ *
+ * If there's only one argument, it assumes the numbers are space-separated
+ * inside that single argument and splits it accordingly. Otherwise, it
+ * takes numbers from the command line arguments directly.
+ *
+ * @param argc Argument count from the main function.
+ * @param argv Argument values from the main function.
+ * @param meta A pointer to the meta_data structure.
+ * @return Returns 1 if the loading was successful, 0 otherwise.
+ */
 static int	ft_loader_select(int argc, char *argv[], t_meta_data *meta)
 {
 	char	**list;
@@ -39,6 +51,17 @@ static int	ft_loader_select(int argc, char *argv[], t_meta_data *meta)
 	}
 }
 
+/**
+ * @brief Process the input list of numbers.
+ *
+ * Calls the loader function to load numbers into the stack and sets
+ * an error flag if there's any issue.
+ *
+ * @param argc Argument count from the main function.
+ * @param argv Argument values from the main function.
+ * @param meta A pointer to the meta_data structure.
+ * @return Always returns 1.
+ */
 int	ft_process_list(int argc, char *argv[], t_meta_data *meta)
 {
 	if (ft_loader_select(argc, argv, meta) == 0)
@@ -46,6 +69,15 @@ int	ft_process_list(int argc, char *argv[], t_meta_data *meta)
 	return (1);
 }
 
+/**
+ * @brief Process the list of commands to manipulate the stacks.
+ *
+ * Reads commands from the standard input and processes them in order.
+ * Updates the total moves count in the meta data.
+ *
+ * @param argc Argument count from the main function.
+ * @param meta A pointer to the meta_data structure.
+ */
 void	ft_process_commands(int argc, t_meta_data *meta)
 {
 	char	*line;

@@ -10,12 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @brief Checks if the character is a printable whitespace.
+ *
+ * The function checks if the character passed is one of the common white spaces 
+ * such as space, form-feed, new-line, carriage return, vertical tab, and tab.
+ * 
+ * @param c Character to be checked.
+ * 
+ * @return Returns 1 if the character is a printable whitespace, 0 otherwise.
+ */
 static int	ft_atoi_isprint(char c)
 {
 	return (c == ' ' || c == '\f' || c == '\n'
 		|| c == '\r' || c == '\v' || c == '\t');
 }
 
+/**
+ * @brief Parses the spaces and potential signs in the input string.
+ *
+ * Skips the whitespace characters at the start of the string and checks 
+ * for the presence of '+' or '-' signs. Adjusts the parsing position 
+ * and the result value accordingly.
+ * 
+ * @param str Input string.
+ * @param i Pointer to the current parsing position.
+ * @param rst Pointer to the result value.
+ */
 static void	ft_atoi_spaces(char *str, int *i, long long int *rst)
 {
 	while (ft_atoi_isprint(str[*(i)]) == 1)
@@ -28,6 +49,17 @@ static void	ft_atoi_spaces(char *str, int *i, long long int *rst)
 	}
 }
 
+/**
+ * @brief Checks the result of the atoi conversion for overflow.
+ *
+ * Tests if the result value, after a new digit is added, overflows 
+ * the integer range. Adjusts the result value accordingly.
+ * 
+ * @param rst Array containing result values and signs.
+ * @param c Current character (digit) being parsed.
+ * 
+ * @return Returns 1 if successful, 0 or -1 for overflow cases.
+ */
 static int	ft_atoi_test(long long int *rst, char c)
 {
 	long long int	test;
@@ -48,6 +80,16 @@ static int	ft_atoi_test(long long int *rst, char c)
 	return (1);
 }
 
+/**
+ * @brief Converts the input string to integer and checks for validity.
+ *
+ * Parses the string, checks for valid characters, and attempts to convert 
+ * it to an integer. Validates against integer overflow and non-digit characters.
+ * 
+ * @param str Input string.
+ * 
+ * @return Returns 1 if the string is a valid integer, 0 or -1 otherwise.
+ */
 int	ft_send_to_atoi(char *str)
 {	
 	long long int	rst[3];

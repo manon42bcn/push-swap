@@ -12,6 +12,16 @@
 
 #include "../inc/push_swap.h"
 
+/**
+ * @brief Checks if the stack A is sorted in ascending order.
+ *
+ * Verifies that stack A is properly sorted and that there are no elements 
+ * in stack B. If both conditions are met, the function returns 1.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * 
+ * @return Returns 1 if stack A is sorted and stack B is empty, 0 otherwise.
+ */
 int	ft_check_solve(t_meta_data *meta)
 {
 	int			i;
@@ -36,6 +46,19 @@ int	ft_check_solve(t_meta_data *meta)
 	return (1);
 }
 
+/**
+ * @brief Checks if the specified stack (A or B) is sorted.
+ *
+ * For stack A, the function checks if the elements are in ascending order. 
+ * For stack B, it checks if the elements are in descending order. 
+ * The function returns the number of elements in the checked stack.
+ * 
+ * @param meta Metadata structure containing stack information.
+ * @param ab Character indicating which stack (A or B) to check.
+ * 
+ * @return Returns the number of elements in the specified stack if sorted,
+ *         0 otherwise.
+ */
 int	ft_check_solve_stack(t_meta_data *meta, char ab)
 {
 	int			prev;

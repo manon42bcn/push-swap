@@ -12,6 +12,13 @@
 
 #include "../inc/checker.h"
 
+/**
+ * @brief Checks if the given number is already in stack A.
+ *
+ * @param meta A pointer to the meta_data structure.
+ * @param num The number to be checked.
+ * @return Returns 1 if the number is unique, 0 if it's a duplicate.
+ */
 static int	ft_check_input(t_meta_data *meta, int num)
 {
 	t_stacks	*node;
@@ -31,6 +38,16 @@ static int	ft_check_input(t_meta_data *meta, int num)
 	}
 }
 
+/**
+ * @brief Creates a new node for the stack with the given value.
+ *
+ * This function first checks if the value is already in stack A
+ * to ensure uniqueness and then creates the node if unique.
+ *
+ * @param meta A pointer to the meta_data structure.
+ * @param value The value to be added to the new node.
+ * @return Returns a pointer to the new node if successful, NULL otherwise.
+ */
 static t_stacks	*ft_create_elem(t_meta_data *meta, int value)
 {
 	t_stacks	*node;
@@ -45,6 +62,16 @@ static t_stacks	*ft_create_elem(t_meta_data *meta, int value)
 	return (node);
 }
 
+/**
+ * @brief Checks if the input values are within the integer limits.
+ *
+ * This function processes the input strings and ensures that each
+ * string represents a valid integer within the boundaries.
+ *
+ * @param input Array of input strings.
+ * @param meta A pointer to the meta_data structure.
+ * @return Returns 1 if all input values are valid, 0 otherwise.
+ */
 int	ft_check_input_limits(char **input, t_meta_data *meta)
 {
 	int	i;
@@ -64,6 +91,15 @@ int	ft_check_input_limits(char **input, t_meta_data *meta)
 	return (1);
 }
 
+/**
+ * @brief Initializes the meta_data structure.
+ *
+ * Allocates and initializes the meta_data structure which holds
+ * essential information and pointers for the sort algorithm.
+ *
+ * @return Returns a pointer to the initialized meta_data structure
+ * if successful, NULL otherwise.
+ */
 t_meta_data	*ft_meta_data_init(void)
 {
 	t_meta_data	*rst;
@@ -80,6 +116,16 @@ t_meta_data	*ft_meta_data_init(void)
 	return (rst);
 }
 
+/**
+ * @brief Populates stack A from the input values.
+ *
+ * This function processes the input strings, converts them
+ * to integers, and loads them into stack A.
+ *
+ * @param input Array of input strings.
+ * @param meta A pointer to the meta_data structure.
+ * @return Returns 1 if the loading was successful, 0 otherwise.
+ */
 int	ft_load_stack(char **input, t_meta_data *meta)
 {
 	int			i;

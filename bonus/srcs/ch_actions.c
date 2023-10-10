@@ -12,6 +12,15 @@
 
 #include "../inc/checker.h"
 
+/**
+ * @brief Swaps the first two elements of one or both stacks.
+ *
+ * If 'ab' is 'a', 'b', or 's', it will perform the swap action on the stack 'a',
+ * stack 'b', or both stacks respectively.
+ *
+ * @param meta Pointer to metadata containing information about the stacks.
+ * @param ab The stack identifier ('a', 'b', or 's' for both).
+ */
 void	ft_swap_action(t_meta_data *meta, char ab)
 {
 	t_stacks	*tmp;
@@ -38,6 +47,15 @@ void	ft_swap_action(t_meta_data *meta, char ab)
 	}
 }
 
+/**
+ * @brief Rotates a stack upwards.
+ *
+ * The first element of the stack becomes the last one. This operation is done
+ * for stack 'a' or 'b' based on the provided stack identifier.
+ *
+ * @param meta Pointer to metadata containing information about the stacks.
+ * @param ab The stack identifier ('a' or 'b').
+ */
 void	ft_rotate_action(t_meta_data *meta, char ab)
 {
 	t_stacks	*tmp;
@@ -61,6 +79,15 @@ void	ft_rotate_action(t_meta_data *meta, char ab)
 	}
 }
 
+/**
+ * @brief Rotates a stack downwards.
+ *
+ * The last element of the stack becomes the first one. This operation is done
+ * for stack 'a' or 'b' based on the provided stack identifier.
+ *
+ * @param meta Pointer to metadata containing information about the stacks.
+ * @param ab The stack identifier ('a' or 'b').
+ */
 void	ft_reverse_rotate_action(t_meta_data *meta, char ab)
 {
 	t_stacks	*tmp;
@@ -89,6 +116,16 @@ void	ft_reverse_rotate_action(t_meta_data *meta, char ab)
 	}
 }
 
+/**
+ * @brief Pushes the first element of one stack onto the other stack.
+ *
+ * Takes the first element of stack 'a' or 'b' (based on the 'ab' identifier)
+ * and puts it at the top of the other stack. If 'ab' is 's', it swaps the
+ * stacks.
+ *
+ * @param meta Pointer to metadata containing information about the stacks.
+ * @param ab The stack identifier ('a', 'b', or 's' to swap stacks).
+ */
 void	ft_push_action(t_meta_data *meta, char ab)
 {
 	t_stacks	*tmp;
