@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../../libft/libft.h"
+# include "../../libft/inc/libft.h"
 
 typedef struct s_stacks
 {
